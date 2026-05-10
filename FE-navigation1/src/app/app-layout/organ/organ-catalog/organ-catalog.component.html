@@ -1,0 +1,21 @@
+<div class="view">
+  <div style="margin: 1em">
+    <app-breadcrumb />
+  </div>
+  <div class="catalog">
+    <app-catalog-tool-bar
+      [selectValues]="diagnoses"
+      [(showAsTiles)]="showAsTiles"
+      [(textSearch)]="organNameSearch"
+      [(selectedIdFilter)]="diagnosisFilter"
+      [(itemSorting)]="itemSorting" />
+    <div class="item-grid">
+      <app-catalog-grid
+        [staticIconEndpoint]="staticIconEndpoint"
+        [showAsTiles]="showAsTiles"
+        [toRoute]="toRoute"
+        [idLabel]="idLabel"
+        [itemsData]="filteredOrgans()" />
+    </div>
+  </div>
+</div>

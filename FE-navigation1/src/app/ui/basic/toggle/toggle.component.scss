@@ -1,0 +1,51 @@
+button.toggle-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  min-width: 190px;
+}
+
+button.toggle-button.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.toggle-switch {
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  background-color: #cbd5e1;
+  position: relative;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toggle-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: left 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+button.toggle-button.checked .toggle-switch {
+  background-color: #0891B2;
+}
+
+button.toggle-button.checked .toggle-thumb {
+  left: 23px;
+}
+
+.toggle-label {
+  font-size: 14px;
+  color: #0f172a;
+}

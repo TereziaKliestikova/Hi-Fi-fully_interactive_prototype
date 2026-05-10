@@ -1,0 +1,5 @@
+<span>
+  <app-anchor *ngIf="linkLeft" [to]="link.to">{{ link.text }}</app-anchor>
+  <span>{{ linkLeft ? ' ' + text : text + ' ' }}</span>
+  <app-anchor *ngIf="!linkLeft" [to]="link.to">{{ link.text }}</app-anchor>
+</span>

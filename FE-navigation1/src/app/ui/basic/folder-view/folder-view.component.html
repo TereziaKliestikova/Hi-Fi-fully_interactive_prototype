@@ -1,0 +1,134 @@
+<!-- Context menu -->
+<ng-container *ngIf="accessType">
+  <mat-menu
+    *transloco="let t; read: 'learning.folderViewComponent'"
+    #nodeMenu="matMenu"
+    class="node-context-menu">
+    <button
+      class="menu-item"
+      mat-menu-item
+      (click)="nodeMenuActions('hide', menuTargetNode!)">
+      <span *ngIf="menuTargetNode?.public">{{ t('actions.hide') }}</span>
+      <mat-icon
+        *ngIf="menuTargetNode?.public"
+        class="menu-icon"
+        svgIcon="hipa-lock"></mat-icon>
+      <span *ngIf="!menuTargetNode?.public">{{ t('actions.publish') }}</span>
+      <mat-icon
+        *ngIf="!menuTargetNode?.public"
+        class="menu-icon"
+        svgIcon="hipa-public"></mat-icon>
+    </button>
+    <button
+      *ngIf="(menuTargetNode?.level ?? 1) < 2"
+      mat-menu-item
+      (click)="nodeMenuActions('add', menuTargetNode!)">
+      <span>{{ t('actions.newFolder') }}</span>
+      <mat-icon svgIcon="hipa-add" class="menu-icon"></mat-icon>
+    </button>
+    <button mat-menu-item (click)="nodeMenuActions('delete', menuTargetNode!)">
+      <span>{{ t('actions.delete') }}</span>
+      <mat-icon svgIcon="hipa-trash" class="menu-icon"></mat-icon>
+    </button>
+  </mat-menu>
+</ng-container>
+
+<app-modal-actions-confirmation
+  *ngIf="currentlyOpenModal?.open && accessType"
+  [config]="currentlyOpenModal!.modalConfig"
+  (cancel)="currentlyOpenModal!.open = false"
+  (create)="currentlyOpenModal?.createAction($event)"
+  (confirm)="currentlyOpenModal?.confirmAction()">
+</app-modal-actions-confirmation>
+
+<mat-tree
+  #tree
+  [dataSource]="dataSource"
+  [treeControl]="treeControl"
+  class="tree">
+  <mat-tree-node
+    *matTreeNodeDef="let node"
+    matTreeNodePadding
+    [matTreeNodePaddingIndent]="20"
+    class="node"
+    [ngClass]="{
+      'root-node': node.level === 0,
+      'selected-node': selectedFolder?.id === node.id,
+    }"
+    (click)="selectFolder(node)">
+    <span class="node-text">
+      {{ node.name }}
+    </span>
+  </mat-tree-node>
+  <mat-tree-node
+    class="node"
+    *matTreeNodeDef="let node; when: hasChild"
+    [ngClass]="[
+      'lvl-' + node.level,
+      selectedFolder?.id === node.id ? 'selected-node' : '',
+    ]"
+    [class.root-node]="node.level === 0"
+    [matTreeNodePaddingIndent]="20"
+    matTreeNodePadding
+    (click)="selectFolder(node)">
+    <img
+      class="node-icon"
+      alt="Folder icon"
+      src="assets/admin/folder-icon.svg"
+      [height]="getIconSizeForLeve(node.level)"
+      [width]="getIconSizeForLeve(node.level)" />
+    <span class="node-text">
+      {{ node.name }}
+    </span>
+    <div class="button-container">
+      <button
+        *ngIf="accessType"
+        mat-icon-button
+        [matMenuTriggerFor]="nodeMenu"
+        (click)="$event.stopPropagation(); menuTargetNode = node">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        matTreeNodeToggle
+        [attr.aria-label]="'Toggle ' + node.name">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{
+            treeControl.isExpanded(node) ? 'expand_more' : 'keyboard_arrow_up'
+          }}
+        </mat-icon>
+      </button>
+    </div>
+  </mat-tree-node>
+  <mat-tree-node
+    class="node"
+    *matTreeNodeDef="let node; when: hasNoChild"
+    [ngClass]="[
+      'lvl-' + node.level,
+      selectedFolder?.id === node.id ? 'selected-node' : '',
+    ]"
+    [matTreeNodePaddingIndent]="20"
+    matTreeNodePadding
+    (click)="selectFolder(node)">
+    <img
+      alt="Folder icon"
+      class="node-icon"
+      src="assets/admin/folder-simple-icon.svg"
+      [height]="getIconSizeForLeve(node.level)"
+      [width]="getIconSizeForLeve(node.level)" />
+    <span class="node-text">
+      {{ node.name }}
+    </span>
+    <div class="button-container">
+      <div class="button-container">
+        <button
+          *ngIf="accessType"
+          mat-icon-button
+          [matMenuTriggerFor]="nodeMenu"
+          (click)="$event.stopPropagation(); menuTargetNode = node">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-tree-node>
+</mat-tree>

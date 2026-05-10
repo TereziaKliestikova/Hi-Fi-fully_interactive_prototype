@@ -1,0 +1,15 @@
+<app-auth-page-layout
+  *transloco="let t; read: 'auth.login'"
+  [title]="t('title')">
+  <app-text-with-link
+    [text]="t('notRegistered.text')"
+    [link]="{
+      to: AppRoutes.auth.registration,
+      text: t('notRegistered.link'),
+    }" />
+  <app-form [doSubmit]="doLogin" [config]="formCfg">
+    <app-anchor underInput [to]="AppRoutes.auth.requestPasswordChange">
+      {{ t('requestPasswordChange.link') }}
+    </app-anchor>
+  </app-form>
+</app-auth-page-layout>

@@ -1,0 +1,15 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .header {
+    z-index: 999;
+  }
+
+  .content {
+    padding: 10px;
+    height: 100%;
+    overflow: auto;
+  }
+}

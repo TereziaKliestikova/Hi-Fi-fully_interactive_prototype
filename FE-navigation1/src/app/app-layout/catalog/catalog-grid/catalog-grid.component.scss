@@ -1,0 +1,68 @@
+@import 'src/styles';
+
+.mat-grid-list {
+  margin: 1em;
+
+  .grid-tile {
+    border: 1px solid $primary;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px -1px #1e293b1f;
+    background: white;
+    overflow: hidden;
+
+    .img-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+    }
+    
+    &::before {
+      position: absolute;
+      content: '\A';
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      z-index: 100;
+      transition: 0.1s ease;
+      background: rgba(8, 145, 178, 0.2);
+    }
+    &:hover::before {
+      opacity: 1;
+    }
+
+    .grid-tile-label {
+      font-size: 1.165em;
+      font-weight: bold;
+      text-align: center;
+      padding: 0.5em 1em;
+      color: #006078;
+    }
+  }
+
+  .grid-list {
+    padding: 1em;
+  }
+}
+
+.catalog-spinner {
+  padding-top: 3em;
+}
+
+.catalog-empty-list {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .mat-grid-list {
+    .grid-tile {
+      .grid-tile-label {
+        font-size: 1.14em;
+      }
+    }
+  }
+}

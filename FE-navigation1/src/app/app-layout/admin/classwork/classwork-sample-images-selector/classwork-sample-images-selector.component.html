@@ -1,0 +1,35 @@
+<div
+  class="toolbar-wrapper"
+  *transloco="let t; read: 'learning.sampleSelectorComponent'">
+  <div class="toolbar-left">
+    <button mat-button class="back-button" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>{{ t('actions.back') }}</span>
+    </button>
+    <div class="title-group">
+      <div class="main-title">{{ t('header.title') }}</div>
+      <div class="subtitle">
+        {{ t('header.subtitle', { count: selectedCount }) }}
+      </div>
+    </div>
+  </div>
+  <div class="toolbar-right">
+    <button mat-stroked-button class="save-button" (click)="insertSelected()">
+      {{ t('actions.insertSelected') }}
+    </button>
+  </div>
+</div>
+<app-modal-actions-confirmation
+  *ngIf="showModal"
+  [config]="modalConfirmConfig"
+  (confirm)="insertSelected()"
+  (cancel)="goBack()">
+</app-modal-actions-confirmation>
+<div class="container" *transloco="let t; read: 'learning.studyTypes'">
+  <app-classwork-table
+    *ngIf="dataSource.data.length > 0"
+    [displayedColumns]="displayedColumns"
+    [dataSource]="dataSource"
+    (selectionChanged)="updateSelected($event)">
+  </app-classwork-table>
+</div>

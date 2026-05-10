@@ -1,0 +1,52 @@
+<div *transloco="let t; read: 'home'" class="container">
+  <h2 class="heading">{{ t('title') }}</h2>
+  <div class="content-container">
+    <div class="content-area text-container">
+      <p class="content-area-p">
+        {{ t('welcomeMessage.paragraph1') }} <br />
+        <br />
+        {{ t('welcomeMessage.paragraph2') }}
+      </p>
+    </div>
+    <app-card-button *ngIf="isAdmin()"
+                     class="admin-button"
+                     [iconHeight]="'125px'"
+                     [title]="t('addsamplebutton')"
+                     [imageUrl]="'assets/sample-image/addsample.svg'"
+                     [outline]="true"
+                     [imageOrder]="'first'"
+                     [fontSize]="24"
+                     (click)="openUploadModal()">
+    </app-card-button>
+  </div>
+  <h2 class="heading">{{ t('content') }}</h2>
+  <div
+    class="tile-list"
+    [ngStyle]="{ 'gap.px': getTileConfig().length <= 3 ? 85 : 40 }">
+    @for (tile of getTileConfig(); track tile) {
+      <app-anchor noUnderline to="{{ tile.path }}" class="tile-anchor">
+        <div class="tile-container">
+          <div class="tile content-area">
+            <h3 class="tile-heading">{{ tile.title | async }}</h3>
+            <div class="tile-text">
+              <p>{{ tile.description | async }}</p>
+            </div>
+            <div
+              class="image-container"
+              [style.height]="tile.heightOverride ? tile.heightOverride : ''"
+              [style.margin-top]="
+                tile.marginTopOverride ? tile.marginTopOverride : ''
+              ">
+              <img
+                [style.height]="tile.heightOverride ? tile.heightOverride : ''"
+                src="{{ tile.imageUrl }}"
+                alt="{{ tile.alt }}"
+                role="img"
+                class="image" />
+            </div>
+          </div>
+        </div>
+      </app-anchor>
+    }
+  </div>
+</div>

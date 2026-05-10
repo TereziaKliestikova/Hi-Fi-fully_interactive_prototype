@@ -1,0 +1,13 @@
+<button
+  [disabled]="state !== 'enabled'"
+  class="app-button"
+  [color]="color"
+  mat-flat-button
+  [type]="type">
+  <span>
+    <ng-content />
+    @if (state === 'loading') {
+      <app-spinner class="form-spinner" size="20" />
+    }
+  </span>
+</button>

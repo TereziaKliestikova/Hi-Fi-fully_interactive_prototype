@@ -1,0 +1,125 @@
+
+.toolbar-wrapper {
+  width: 98%;
+  margin: 0;
+  padding: 12px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fb00;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+
+.toolbar-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+
+.toolbar-left .back-button {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  text-transform: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+.toolbar-left .back-button mat-icon {
+  font-size: 20px;
+  color: #334155;
+}
+
+.toolbar-left .title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.toolbar-left .title-group .main-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #155E75;
+}
+
+.toolbar-left .title-group .subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+
+.toolbar-right button {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 20px;
+  text-transform: none;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid #cbd5e1;
+  color: #0f517a;
+  cursor: pointer;
+}
+
+::ng-deep .toolbar-right .save-button {
+  background-color: #0891B21A !important;
+  border-color: #155E75 !important;
+  color: #155E75 !important;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25) !important;;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+
+::ng-deep .toolbar-right .save-button:hover {
+  background-color: #0891B23C !important;
+  border-color: #155E75 !important;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.25) !important;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto 24px;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+app-classwork-table,
+app-classwork-table .samples-table {
+  width: 100%;
+  box-sizing: border-box;
+  table-layout: fixed;
+}
+
+
+app-classwork-table th.mat-header-cell,
+app-classwork-table td.mat-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 8px;
+}
+
+
+::ng-deep app-classwork-table .samples-table {
+  min-height: 65vh;
+}
+

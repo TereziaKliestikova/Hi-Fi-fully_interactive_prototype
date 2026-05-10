@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+div.registration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  max-width: 400px;
+
+  .registration-confirmation {
+    text-align: center;
+  }
+
+  a {
+    color: #52525b;
+    font-weight: 700;
+    text-decoration: none;
+    &:hover {
+      color: #155e75;
+    }
+  }
+}
+
+.logo {
+  width: 250px;
+  height: 100px;
+}
+
+.info {
+  text-align: center;
+}

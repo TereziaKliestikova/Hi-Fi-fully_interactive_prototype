@@ -1,0 +1,89 @@
+.upload-container {
+  position: fixed;
+  bottom: 0px;
+  left: 20px;
+  width: 290px;
+  background: white;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.upload-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.upload-header-icons h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #155e75;
+  margin-bottom: 0px;
+}
+
+.upload-header-icons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.upload-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+  border-top: 1px solid #0891b2;
+}
+
+.upload-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  // gap: 10px;
+}
+
+.toggle-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #155e75;
+}
+
+mat-progress-spinner {
+  width: 24px !important;
+  height: 24px !important;
+  stroke-width: 3px !important;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+// .file-name {
+//   font-size: 14;
+//   color: #000000;
+// }
+.file-name {
+  font-size: 14px;
+  color: #000000;
+
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+.cancel {
+  cursor: pointer;
+  color: #155e75;
+  font-size: 10px;
+  text-decoration: underline;
+}

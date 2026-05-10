@@ -1,0 +1,25 @@
+<div class="editor-comp">
+  <!-- container for the Quill editor's input field -->
+  <div id="editor-container"></div>
+  <!-- layout for the Quill editor's toolbar -->
+  <div id="editor-toolbar">
+    <div class="editor-controls">
+      <!-- do NOT insert any content into the buttons - Quill fills them automatically -->
+      <!-- eslint-disable @angular-eslint/template/elements-content -->
+      <button class="ql-bold"></button>
+      <button class="ql-italic"></button>
+      <button class="ql-underline"></button>
+      <button class="ql-list" value="ordered"></button>
+      <button class="ql-list" value="bullet"></button>
+      <!-- eslint-enable @angular-eslint/template/elements-content -->
+    </div>
+    <div class="editor-buttons">
+      <button class="editor-save" mat-raised-button (click)="saveContent()">
+        {{ translations['save'] }}
+      </button>
+      <button class="editor-close" mat-raised-button (click)="cancel()">
+        {{ translations['close'] }}
+      </button>
+    </div>
+  </div>
+</div>

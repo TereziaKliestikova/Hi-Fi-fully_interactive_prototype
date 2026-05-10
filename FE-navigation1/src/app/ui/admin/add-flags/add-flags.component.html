@@ -1,0 +1,41 @@
+<div
+  class="modal-overlay"
+  (click)="closeModal()"
+  (keyup.enter)="closeModal()"
+  tabindex="1"></div>
+
+<div class="modal" *transloco="let t; read: 'admin.addFlagsComponent'">
+  <button class="close-btn" (click)="closeModal()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <h2>{{ t('title') }}</h2>
+
+  <label for="labelName">{{ t('addFlagTitle') }}</label>
+  <input
+    id="labelName"
+    type="text"
+    [(ngModel)]="labelName"
+    placeholder="{{ t('placeholder') }}" />
+
+  <label for="color-picker">{{ t('addFlagColor') }}</label>
+  <div class="color-picker">
+    <div
+      id="color-picker"
+      *ngFor="let color of colors"
+      [ngStyle]="setColor(color)"
+      (click)="selectColor(color)"
+      (keyup.enter)="selectColor(color)"
+      tabindex="2"
+      [class.selected]="color === selectedColor"></div>
+  </div>
+
+  <div *ngIf="showWarning" class="warning-box">
+    {{ t('warning') }}
+  </div>
+
+  <div class="buttons">
+    <button class="cancel" (click)="closeModal()">{{ t('clean') }}</button>
+    <button class="create" (click)="createLabel()">{{ t('create') }}</button>
+  </div>
+</div>

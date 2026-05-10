@@ -1,0 +1,292 @@
+<div class="container" *transloco="let t; read: 'learning.studyPage'">
+  <div style="margin: 1em">
+    <app-breadcrumb></app-breadcrumb>
+  </div>
+
+  <app-modal-actions-confirmation
+    *ngIf="currentlyOpenModal?.open && accessType"
+    [config]="currentlyOpenModal!.modalConfig"
+    (cancel)="currentlyOpenModal!.open = false"
+    (create)="currentlyOpenModal?.createAction($event)"
+    (confirm)="currentlyOpenModal?.confirmAction()">
+  </app-modal-actions-confirmation>
+
+  <mat-drawer-container class="side-container">
+    <mat-drawer class="drawer custom-drawer" mode="side" opened>
+      <div class="drawer-container">
+        <app-card-button
+          (buttonClick)="openModal('Create')"
+          *ngIf="accessType"
+          class="add-folder-btn"
+          style="margin-top: 25px"
+          [outline]="true"
+          [bold]="true"
+          color="black"
+          backgroundColor="rgba(8, 145, 178, 0.08)"
+          size="small"
+          imageUrl="assets/admin/add-folder-icon.svg"
+          iconHeight="30px"
+          imageOrder="first"
+          [fontSize]="15"
+          title="{{ t('actions.newFolder') }}"></app-card-button>
+        <app-folder-view
+          [data]="directoryTree"
+          class="folder-view"
+          [studyName]="studyName"
+          [selectedFolderId]="selectedFolderId"
+          (foldersChanged)="getFolderTree()"
+          (folderDetailsChanged)="folderDetailsChanged($event)"
+          (folderSelectionChanged)="selectedFolderChanged($event?.id!)"
+          (folderDeleted)="folderDeleted($event)"
+          (folderHidden)="folderHiddenNotify($event)"
+          (folderPublished)="folderPublishedNotify($event)"
+          [accessType]="accessType"></app-folder-view>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div *ngIf="!selectedFolder" class="no-selection-placeholder">
+        <img [src]="placeholderImage" alt="Please select a folder or item" />
+      </div>
+
+      <div *ngIf="selectedFolder" class="content-container">
+        <div class="title-container">
+          <h1 class="title">{{ selectedFolder.name }}</h1>
+        </div>
+        <section *ngIf="selectedFolder" class="section info-section">
+          <app-card-button
+            *ngIf="accessType"
+            [outline]="true"
+            [width]="200"
+            class="action-button"
+            [bold]="true"
+            color="black"
+            backgroundColor="rgba(8, 145, 178, 0.08)"
+            size="nano"
+            [imageUrl]="
+              selectedFolder.isPublic
+                ? 'assets/generic/lock-icon.svg'
+                : 'assets/generic/public-icon.svg'
+            "
+            iconHeight="20px"
+            imageOrder="first"
+            [fontSize]="13"
+            (buttonClick)="
+              selectedFolder.isPublic
+                ? toggleSelectedFolderVisibility()
+                : openModal('ConfirmPublish')
+            "
+            title="
+              {{
+              t(
+                selectedFolder.isPublic
+                  ? 'actions.hideFolder'
+                  : 'actions.publishFolder'
+              )
+            }}
+            "></app-card-button>
+
+          <div *ngIf="accessType" class="text-container">
+            <p class="label">{{ t('status') }}</p>
+            <p class="text-value" *ngIf="selectedFolder.isPublic">
+              {{ t('statusTypes.public') }}
+            </p>
+            <p class="text-value" *ngIf="!selectedFolder.isPublic">
+              {{ t('statusTypes.private') }}
+            </p>
+
+            <mat-icon
+              *ngIf="selectedFolder.isPublic"
+              svgIcon="hipa-public"></mat-icon>
+            <mat-icon *ngIf="!selectedFolder.isPublic" svgIcon="hipa-lock"
+              >public</mat-icon
+            >
+          </div>
+
+          <div class="input-container">
+            <p class="label">{{ t('description') }}</p>
+            <mat-form-field class="form-field" appearance="outline">
+              <input
+                class="mat-input"
+                matInput
+                type="text"
+                [disabled]="!accessType"
+                (focusout)="updateFolderDetails()"
+                [(ngModel)]="selectedFolder.description" />
+            </mat-form-field>
+          </div>
+          <!-- Modify the keywords container section -->
+          <div class="input-container keywords-container">
+            <p class="label">{{ t('keywords') }}</p>
+            <div class="keywords-wrapper">
+              <mat-form-field
+                class="full-width form-field keywords-field"
+                appearance="outline">
+                <input
+                  #kw
+                  name="currentKeyWord"
+                  placeholder=""
+                  [disabled]="!accessType"
+                  (input)="currentKeyWord.next(kw.value)"
+                  [matChipInputFor]="chipGrid"
+                  [matAutocomplete]="auto"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)" />
+                <mat-autocomplete
+                  #auto="matAutocomplete"
+                  (optionSelected)="selected($event, kw)">
+                  <mat-option
+                    *ngFor="let keyWord of filteredkeyWords"
+                    [value]="keyWord">
+                    {{ keyWord }}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-chip-grid
+                  #chipGrid
+                  [attr.aria-label]="'form.annotationFile.placeholder'">
+                  @for (keyWord of keyWords(); track $index) {
+                    <mat-chip-row
+                      (removed)="remove(keyWord)"
+                      [removable]="accessType">
+                      {{ keyWord }}
+                      <button
+                        matChipRemove
+                        [attr.aria-label]="'remove ' + keyWord">
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip-row>
+                  }
+                </mat-chip-grid>
+              </mat-form-field>
+            </div>
+          </div>
+        </section>
+
+        <section *ngIf="selectedFolder" class="section files-section">
+          <h1 class="title">{{ t('categories.files') }}</h1>
+          <app-card-button
+            *ngIf="accessType"
+            [width]="210"
+            [outline]="true"
+            class="action-button"
+            (buttonClick)="folderFileUpload()"
+            [bold]="true"
+            color="black"
+            backgroundColor="rgba(8, 145, 178, 0.08)"
+            size="nano"
+            imageUrl="assets/generic/add-file-icon.svg"
+            iconHeight="20px"
+            imageOrder="first"
+            [fontSize]="13"
+            title="{{ t('actions.insertFile') }}"></app-card-button>
+          <app-folder-children-files
+            class="list-component"
+            [items]="fileNames()"
+            [ids]="fileIds()"
+            [iconType]="'img'"
+            [icons]="'assets/admin/file-svg.svg'"
+            [removable]="accessType"
+            (clicked)="onFileClick($event)"
+            (remove)="
+              onFileRemoved($event.id, $event.name)
+            "></app-folder-children-files>
+          <p *ngIf="fileNames().length === 0" class="placeholder-text">
+            {{ t('placeholders.emptyFiles') }}
+          </p>
+        </section>
+
+        <section *ngIf="selectedFolder" class="section folders-section">
+          <h1 class="title">{{ t('categories.folders') }}</h1>
+          <app-card-button
+            *ngIf="accessType"
+            [width]="210"
+            [disabled]="selectedFolder.level > 1"
+            (buttonClick)="openModal('Create'); folderType = 'Sub'"
+            [outline]="true"
+            class="action-button"
+            [bold]="true"
+            color="black"
+            backgroundColor="rgba(8, 145, 178, 0.08)"
+            size="nano"
+            imageUrl="assets/generic/add-folder-small-icon.svg"
+            iconHeight="20px"
+            imageOrder="first"
+            [fontSize]="13"
+            title="{{ t('actions.createFolder') }}"></app-card-button>
+          <app-folder-children-files
+            class="list-component"
+            [items]="childFolderNames()"
+            [ids]="childFolderIds()"
+            [icons]="'assets/admin/folder-icon.svg'"
+            [iconType]="'img'"
+            [removable]="false"
+            (clicked)="selectFolder($event)"></app-folder-children-files>
+          <p *ngIf="childFolderNames().length === 0" class="placeholder-text">
+            {{ t('placeholders.emptyFolders') }}
+          </p>
+        </section>
+
+        <section *ngIf="selectedFolder" class="section sample-image-section">
+          <h1 class="title">{{ t('categories.images') }}</h1>
+          <div class="action-buttons">
+            <app-card-button
+              *ngIf="selectedSamplesId.length === 0 && accessType"
+              [width]="210"
+              (buttonClick)="imageSelectorRoute()"
+              [outline]="true"
+              class="action-button"
+              [bold]="true"
+              color="black"
+              backgroundColor="rgba(8, 145, 178, 0.08)"
+              size="nano"
+              imageUrl="assets/generic/add-listitem-icon.svg"
+              iconHeight="20px"
+              imageOrder="first"
+              [fontSize]="13"
+              title="{{ t('actions.selectImage') }}">
+            </app-card-button>
+
+            <app-card-button
+              *ngIf="selectedSamplesId.length > 0 && accessType"
+              [width]="210"
+              (buttonClick)="openModal('ConfirmSampleImageDelete')"
+              [outline]="true"
+              class="action-button"
+              [bold]="true"
+              color="black"
+              backgroundColor="rgba(8, 145, 178, 0.08)"
+              size="nano"
+              imageUrl="assets/generic/trash-icon.svg"
+              iconHeight="20px"
+              imageOrder="first"
+              [fontSize]="13"
+              title="{{ t('actions.deleteImages') }}">
+            </app-card-button>
+          </div>
+
+          <div class="selected-sample-images-table">
+            <app-classwork-table
+              *ngIf="dataSource.data.length > 0"
+              [isAdmin]="accessType"
+              [displayedColumns]="displayedColumns"
+              [dataSource]="dataSource"
+              (selectionChanged)="updateSelected($event)">
+            </app-classwork-table>
+          </div>
+
+          <p *ngIf="dataSource.data.length === 0" class="placeholder-text">
+            {{ t('placeholders.emptySampleImages') }}
+          </p>
+        </section>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+  <div class="notification-container">
+    <div *ngFor="let notification of notifications; let i = index">
+      <app-admin-notification
+        [message]="notification.message"
+        [duration]="5001"
+        [isUndoRequired]="false"
+        (closed)="notificationClosed()"></app-admin-notification>
+    </div>
+  </div>
+</div>

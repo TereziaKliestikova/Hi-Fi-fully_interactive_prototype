@@ -1,0 +1,110 @@
+.popover {
+  background: white;
+  border: 1px solid #b2ebf2;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  z-index: 1000;
+}
+
+/* Список тегов вертикально */
+.tag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Каждая «пилюля» */
+.tag-item {
+  display: inline-flex; /* Важное отличие: теперь ширина под контент */
+  align-items: center;
+  background-color: #d9f8ff;
+  border-radius: 16px;
+  padding: 6px 6px;
+  font-size: 14px;
+  font-family: sans-serif;
+  color: #00778a; /* Текст и иконки в одном стиле */
+}
+
+.tag-item-wrapper {
+  display: flex; /* Весь контейнер в одну строку */
+}
+
+/* Текст тега */
+.tag-label {
+  margin-right: 8px; /* Отступ между текстом и иконками */
+}
+
+/* Кнопки-иконки внутри «пилюли» */
+.tag-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: bottom;
+  color: #00778a;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+/* Сообщение при отсутствии тегов */
+.no-tags-message {
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Строка ввода для добавления нового тега */
+.tag-input-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  border: 1px solid #00acc1;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Поле ввода */
+.tag-input {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+  outline: none;
+  color: #00778a;
+}
+
+/* Кнопка с плюсом */
+.add-btn {
+  padding: 0 8px;
+  font-size: 18px;
+  border: none;
+  background: transparent;
+  color: #00acc1;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+/* Заголовок и кнопка закрытия (если нужен) */
+.popup-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.close-popup-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}

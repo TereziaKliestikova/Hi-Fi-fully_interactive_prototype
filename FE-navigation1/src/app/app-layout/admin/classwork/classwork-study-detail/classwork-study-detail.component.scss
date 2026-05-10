@@ -1,0 +1,282 @@
+@use '@angular/material' as mat;
+@import 'src/styles';
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 88vh;
+
+  .side-container {
+    height: calc(100% - 3em);
+    width: 100%;
+
+    .drawer {
+      width: 270px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 2px 2px 2px -1px #1e293b1f;
+
+      .drawer-container {
+        height: 100%;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        .add-folder-btn {
+          margin-top: 25px;
+          margin-bottom: 20px;
+        }
+
+        .folder-view {
+          height: 100%;
+        }
+      }
+
+    }
+  }
+
+  .content-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: #f4f4f5;
+
+    .title-container{
+      position: sticky;
+      top: 0;                     // stick at the very top
+      z-index: 10;               // sit above the rest of the section
+      background-color: #f4f4f5; // match your content bg to avoid overlap
+      padding-top: 0.5em;        // optional: add a bit of breathing room
+      padding-bottom: 0.5em;
+
+      .title{
+        margin-left: 26px;
+        margin-top: 10px;
+        font-weight: bold;
+        font-family: 'Inter', sans-serif;
+        font-size: 20px;
+        color: #155E75;
+      }
+    }
+
+
+    //overflow-y: hidden;
+
+    .section {
+      //width: 97%;
+      position: relative;
+      margin: 15px 25px;
+      padding: 40px 20px 20px 20px;
+      background-color: #fff;
+      box-shadow: 2px 4px 4px -1px #1e293b1f;
+
+      border-radius: 10px;
+
+      .title{
+        position: absolute;
+        left: 16px;
+        top: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #155E75;
+      }
+
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+
+      .action-button {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+
+      app-folder-children-files  {
+        margin-top: 10px !important;
+        display: block;
+      }
+    }
+
+  }
+}
+
+.mat-input {
+  font-size: 15px !important;
+  width: 100%;
+}
+.mat-input::placeholder {
+  color: $primary !important;
+}
+.text-container {
+  display: flex;
+  flex-direction: row;
+
+  .label{
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: 300;
+    min-width: max-content;
+    color: #155E75 !important;
+  }
+
+  .text-value{
+    font-size: 16px;
+    margin: 0 5px;
+  }
+}
+
+// Update the input-container and keywords-container styles
+.input-container {
+  display: flex;
+  flex-direction: row;
+
+  .label {
+    display: inline-block;
+    margin-top: 8px;
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: 300;
+    min-width: max-content;
+    color: #155E75 !important;
+  }
+
+  // Modified styling for keywords container
+  &.keywords-container {
+    flex-direction: row; // Change to horizontal layout
+    align-items: center; // Center align items
+
+    .label {
+      margin-bottom: 0; // Remove bottom margin
+      margin-top: 0; // Align with the chips
+      width: auto; // Allow natural width
+    }
+
+    .keywords-wrapper {
+      flex: 1; // Take up remaining space
+
+      .form-field {
+        width: 100%;
+        margin: 0; // Remove margin
+      }
+    }
+  }
+
+  .form-field {
+    display: inline-flex;
+    margin: auto 0;
+    width: 100%;
+    max-width: 100%;
+
+    ::ng-deep .mdc-text-field--outlined {
+      padding: 0 10px;
+    }
+
+    // Modify form field for keywords
+    &.keywords-field {
+      ::ng-deep .mat-mdc-form-field-infix {
+        min-height: unset; // Remove fixed height
+        max-height: unset !important; // Remove max height constraint
+        flex-wrap: wrap; // Allow wrapping
+        height: auto; // Allow height to adjust
+        padding: 8px 6px; // Add proper padding
+      }
+
+      // Match the font size to other inputs
+      ::ng-deep input {
+        font-size: 15px !important;
+      }
+
+      // Style the chips to match the input font size
+      ::ng-deep .mat-mdc-chip {
+        font-size: 15px !important;
+        height: auto;
+        min-height: 28px;
+      }
+
+      ::ng-deep .mat-mdc-chip-grid {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+        display: none; // Hide subscript wrapper to save space
+      }
+    }
+
+    ::ng-deep .mat-mdc-form-field-infix {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+      align-items: center;
+      padding: 2px 6px;
+      min-height: 35px;
+      max-height: 35px !important;
+    }
+  }
+}
+
+.selected-sample-images-table{
+  padding-top: 30px;
+  max-height: 380px;
+
+}
+
+// To ensure consistent breadcrumb functionality, make sure it has proper styling
+::ng-deep app-breadcrumb {
+  display: block;
+  width: 100%;
+
+  .breadcrumb-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb-item {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.no-selection-placeholder {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.3;
+
+  img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+::ng-deep .mat-drawer-container,
+.mat-drawer-content,
+.mat-drawer {
+  transform: none !important;
+  z-index: auto !important;
+}
+
+
+.notification-container {
+  position: fixed;
+  bottom: 40px;
+  left: 20px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.placeholder-text {
+  font-style: italic;
+  opacity: 0.6;
+  text-align: center;
+}

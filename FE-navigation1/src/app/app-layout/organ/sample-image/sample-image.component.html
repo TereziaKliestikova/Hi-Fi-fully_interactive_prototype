@@ -1,0 +1,28 @@
+<div style="margin: 1em">
+  <app-breadcrumb class="breadcrumb" />
+</div>
+<div class="navigator-container">
+  <div id="navigatorDiv" class="openseadragon-small navigator"></div>
+</div>
+<div class="container">
+  <div #osdContainer class="osd-container"></div>
+</div>
+<app-sample-image-assistant
+  [toggleEvent]="assistantVisibilityToggle.asObservable()"
+  (annotationCreate)="showAnnotation($event)"
+  (annotationEdit)="updateAnnotationLabel($event)" />
+<div class="button-container">
+  <!-- <button type="button" class="control-button">
+    <img src="assets/sample-image/resize.svg" alt="" height="35" width="35" />
+  </button> -->
+  <button type="button" class="control-button" (click)="toggleAssistant()">
+    <img src="assets/sample-image/helper.svg" alt="" height="35" width="35" />
+  </button>
+</div>
+<div class="zoom-container" *transloco="let t; read: 'sampleImage'">
+  <!-- <p>{{ t('zoom-level') }}: {{ currentZoomLevel }}x</p> -->
+  <div id="zoom-reference"></div>
+  <p [style.width]="referenceSizeBarWidth + 'px'" class="zoom-text">
+    {{ sampleSizeReference }} µm
+  </p>
+</div>

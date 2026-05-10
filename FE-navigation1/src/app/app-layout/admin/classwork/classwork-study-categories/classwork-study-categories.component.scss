@@ -1,0 +1,75 @@
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.grid-list {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  height: 100%;
+  width: 800px !important;
+  margin: 40px auto auto;
+
+  .tile-container {
+    &:hover {
+      background-color: #0891b233;
+      cursor: pointer;
+    }
+
+    text-align: center;
+    max-width: 385px;
+    min-width: 250px;
+    //max-height: 545px;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px -1px #1e293b1f;
+    border-radius: 9px;
+    padding: 3px;
+    height: 100%;
+
+    .content-area {
+      height: 100%;
+      .tile-heading {
+        margin-top: 40px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #155e75;
+      }
+    }
+
+    .tile-text {
+      text-align: center;
+      font-size: 16px;
+      margin-top: 4em;
+      height: 50px;
+    }
+
+    .image-container {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: -20px;
+
+      .image-pre {
+        max-width: 212px;
+        max-height: 214px;
+        margin: auto;
+      }
+      .image-post {
+        max-width: 300px;
+        max-height: 258px;
+        margin: auto;
+      }
+    }
+  }
+}
+
+/* Style the grid tiles for centered content with minimal padding */
+.tile-container {
+  padding: 4px; /* adjust padding as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
