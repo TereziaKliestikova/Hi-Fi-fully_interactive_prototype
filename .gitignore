@@ -1,0 +1,23 @@
+.DS_Store
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+.cache/
+npm-debug.log*
+yarn-error.log*
+
+# .NET
+bin/
+obj/
+.vs/
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# Local environment / secrets
+.env
+*.env
+appsettings.Local.json
