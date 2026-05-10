@@ -1,0 +1,5 @@
+services:
+  hipa-fe:
+    build: .
+    ports:
+      - '80:80'

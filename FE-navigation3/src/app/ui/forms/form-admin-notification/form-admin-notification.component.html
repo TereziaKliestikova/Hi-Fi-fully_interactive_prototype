@@ -1,0 +1,11 @@
+<div
+  class="notification"
+  [class.show]="isVisible"
+  @fadeInOut
+  *transloco="let t; read: 'admin.adminNotification'">
+  <span class="message">{{ message }}</span>
+  <button *ngIf="isUndoRequired" class="action-button" (click)="onUndo()">
+    {{ t('undo') }}
+  </button>
+  <button class="close-button" (click)="close('userClose')">&times;</button>
+</div>

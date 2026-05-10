@@ -1,0 +1,12 @@
+<div class="placeholder">
+  <div class="content" *ngIf="message || error">
+    <span>{{ (message | async) || error }}</span>
+    <button (click)="hide()">
+      <img
+        src="../../../../assets/X-button.svg"
+        alt=""
+        height="15.5"
+        width="15.5" />
+    </button>
+  </div>
+</div>

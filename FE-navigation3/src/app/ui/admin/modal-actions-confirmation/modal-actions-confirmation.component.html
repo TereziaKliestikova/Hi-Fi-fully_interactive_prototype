@@ -1,0 +1,52 @@
+<div
+  class="modal-overlay"
+  (keyup)="onCancel()"
+  (click)="onCancel()"
+  tabindex="0">
+  <div
+    class="modal"
+    (keyup)="$event.stopPropagation()"
+    (click)="$event.stopPropagation()"
+    tabindex="1">
+    <h2 *ngIf="config && config.title">{{ config.title }}</h2>
+    <div *ngIf="config && config.paragraphs">
+      <ng-container *ngFor="let paragraph of config.paragraphs; let i = index">
+        <p>
+          {{ paragraph }}
+          <strong
+            *ngIf="i === config.paragraphs.length - 1 && config.highlightText">
+            {{ config.highlightText }}
+          </strong>
+        </p>
+      </ng-container>
+    </div>
+    <div *ngIf="config && !config.paragraphs">
+      <mat-form-field
+        class="form-field full-width mat-form-field--compact"
+        appearance="outline">
+        <input
+          matInput
+          class="input-design"
+          placeholder="{{ config.textBoxPlaceholderText }}"
+          [(ngModel)]="inputData"
+          (keydown.enter)="onConfirm()" />
+      </mat-form-field>
+    </div>
+    <div class="buttons" *ngIf="config">
+      <button
+        *ngIf="config.cancelText"
+        mat-stroked-button
+        class="cancel-btn"
+        (click)="onCancel()">
+        {{ config.cancelText }}
+      </button>
+      <button
+        *ngIf="config.confirmText"
+        mat-flat-button
+        class="confirm-btn"
+        (click)="onConfirm()">
+        {{ config.confirmText }}
+      </button>
+    </div>
+  </div>
+</div>

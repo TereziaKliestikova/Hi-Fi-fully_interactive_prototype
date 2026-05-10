@@ -1,0 +1,36 @@
+<app-modal-actions-confirmation
+  *ngIf="showConfirmModal"
+  [config]="modalConfig"
+  (cancel)="showConfirmModal = false"
+  (confirm)="removeItem(fileToDelete!)">
+</app-modal-actions-confirmation>
+
+<div class="file-tag" *ngFor="let item of items; let i = index">
+  <ng-container [ngSwitch]="iconType">
+    <mat-icon *ngSwitchCase="'icon'" class="file-icon">
+      {{ icons }}
+    </mat-icon>
+    <img
+      *ngSwitchCase="'img'"
+      class="file-icon"
+      [src]="icons"
+      alt="icon"
+      width="21"
+      height="21" />
+  </ng-container>
+  <span
+    class="file-name"
+    tabindex="0"
+    (keyup)="clickItem(getId(i))"
+    (click)="clickItem(getId(i))"
+    >{{ item }}</span
+  >
+  <span
+    *ngIf="removable"
+    class="file-remove"
+    tabindex="1"
+    (keyup)="removeItem(getId(i))"
+    (click)="openConfirmDeleteModal(getId(i), item)"
+    >✖</span
+  >
+</div>

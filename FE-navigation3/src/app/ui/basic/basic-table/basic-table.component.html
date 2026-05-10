@@ -1,0 +1,340 @@
+<div class="samples-table" *transloco="let t; read: 'organDetail.table'">
+  <div class="table-container">
+    <div class="toggle-wrapper">
+      <app-toggle-button [(checked)]="hideRelevantColumns"></app-toggle-button>
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Favorite Column -->
+      <ng-container matColumnDef="isFavorite">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.isFavorite') }}
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <div class="favourite-column">
+            <mat-icon
+              *ngIf="row.isFavorite"
+              class="custom-star"
+              (click)="onFavouriteIconClick(row)">
+              star
+            </mat-icon>
+            <mat-icon
+              *ngIf="!row.isFavorite"
+              class="custom-star"
+              (click)="onFavouriteIconClick(row)">
+              star_border
+            </mat-icon>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.sampleName') }}
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          (click)="onRowClicked(row)"
+          [attr.id]="row.name === 'Snímka 3' ? 'slide03Cell' : null"
+          style="cursor: pointer">
+          {{ row.name }}
+        </td>
+      </ng-container>
+
+      <!-- Caustry Name Column -->
+      <ng-container matColumnDef="caustryName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.caustryName') }}
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <a
+            *ngIf="row.caustryFile"
+            [href]="getCaustryPath(row.caustryFile)"
+            download="{{ row.caustryFile.name }}"
+            target="_blank"
+            class="pdfNameFontCollor">
+            <mat-icon>insert_drive_file_border</mat-icon>
+            {{ row.caustryFile.name }}
+          </a>
+        </td>
+      </ng-container>
+
+      <!-- Annotations Column -->
+      <ng-container matColumnDef="hasAnnotation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.annotations') }}
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <span
+            [class]="['boolean-chip', row.hasAnnotation ? 'true' : 'false']">
+            {{
+              row.hasAnnotation
+                ? t('values.boolCols.yes')
+                : t('values.boolCols.no')
+            }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Key Words Column -->
+      <!-- <ng-container matColumnDef="keyWords">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.keyWords') }}
+          <button
+            mat-icon-button
+            matTooltip="Hide diagnosis"
+            visibility
+            type="button"
+            (click)="invertHideDiagnosis($event)">
+            <mat-icon>{{
+              showDiagnosis ? 'visibility' : 'visibility_off'
+            }}</mat-icon>
+          </button>
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="toggleRow(row)">
+          <div *ngIf="row.keyWords">
+            <div
+              class="big-tags-container"
+              *ngFor="let tagLine of getTags(row.keyWords); let i = index">
+              <div
+                class="tags-container"
+                *ngFor="let tag of tagLine; let j = index">
+                <span
+                  *ngIf="j < 3 && i < 1 && !isRowExpanded(row)"
+                  class="firstLineTag"
+                  >{{ tag }}</span
+                >
+                <span *ngIf="j < 3 && isRowExpanded(row)" class="tag">{{
+                  tag
+                }}</span>
+              </div>
+              <mat-icon
+                *ngIf="
+                  i < 1 && !isRowExpanded(row) && 1 < getTags(row.keyWords).length
+                "
+                class="dots-icon"
+                (click)="toggleRow(row); $event.stopPropagation()">
+                more_horiz
+              </mat-icon>
+              <mat-icon
+                *ngIf="1 <= i && isRowExpanded(row)"
+                class="dots-icon"
+                (click)="toggleRow(row); $event.stopPropagation()">
+                expand_less
+              </mat-icon>
+            </div>
+          </div>
+        </td>
+      </ng-container> -->
+
+      <!-- Key Words Column -->
+      <ng-container matColumnDef="keyWords">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.keyWords') }}
+          <!-- <button
+            mat-icon-button
+            matTooltip="Hide diagnosis"
+            visibility
+            type="button"
+            (click)="invertHideDiagnosis($event)">
+            <mat-icon>{{
+              showDiagnosis ? 'visibility' : 'visibility_off'
+            }}</mat-icon>
+          </button> -->
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let row"
+          class="keywords-cell"
+          [class.keywords-cell-sample-images]="isSampleImagesListPage()">
+          <div
+            *ngIf="row.keyWords"
+            [class.hidden-column-content]="hideRelevantColumns">
+            <!-- collapsed -->
+            <div *ngIf="!isRowExpanded(row)" class="keywords-inline-wrapper">
+              <div class="keywords-inline" #keywordsInline>
+                <span
+                  *ngFor="let tag of getVisibleTags(row.keyWords)"
+                  class="firstLineTag">
+                  {{ tag }}
+                </span>
+              </div>
+
+              <button
+                *ngIf="hasHiddenTags(row.keyWords, keywordsInline)"
+                mat-icon-button
+                class="dots-button"
+                [matMenuTriggerFor]="keywordsMenu">
+                <mat-icon class="dots-icon">more_horiz</mat-icon>
+              </button>
+
+              <mat-menu
+                #keywordsMenu="matMenu"
+                xPosition="before"
+                yPosition="below">
+                <div
+                  class="keywords-popup"
+                  [style.max-width]="
+                    isSampleImagesListPage() ? '220px' : '300px'
+                  "
+                  [style.padding]="'10px 12px'"
+                  [style.display]="'flex'"
+                  [style.flex-wrap]="'wrap'"
+                  [style.gap]="'6px'">
+                  <span
+                    *ngFor="let tag of getFlatTags(row.keyWords)"
+                    style="
+                      background-color: #e0f7fa;
+                      padding: 4px 7px;
+                      border-radius: 8px;
+                      font-size: 14px;
+                      white-space: nowrap;
+                      display: inline-block;
+                    ">
+                    {{ tag }}
+                  </span>
+                </div>
+              </mat-menu>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="organName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.organ') }}
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="onRowClicked(row)">
+          <span *ngIf="!hideRelevantColumns">
+            {{ row.organName }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="bodySystemNames">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.systems') }}
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="onRowClicked(row)">
+          <span *ngIf="!hideRelevantColumns">
+            {{ row.bodySystemNames[0] }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Note Column -->
+      <ng-container matColumnDef="note">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.note') }}
+        </th>
+        <td mat-cell class="note-cell" *matCellDef="let row">
+          <mat-form-field
+            class="note-form-field form-field"
+            appearance="outline">
+            <input
+              matInput
+              class="input-design notes-input"
+              placeholder="{{ t('values.note.placeholder') }}"
+              [value]="filterHtmlTags(row.note)"
+              [disabled]="textEditorOpen"
+              (focus)="openEditor(row, $event.target)" />
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <!-- Search header -->
+      <ng-container
+        *ngFor="
+          let filterColumn of filterColumns;
+          let i = index;
+          let last = last
+        "
+        [matColumnDef]="filterColumn">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field
+            *ngIf="!checkIfBooleanColumn(i); else dropdown"
+            class="form-field filter-form-field search-input"
+            [ngClass]="{ 'notes-filter-field': last }"
+            [style.width]="isSampleImagesListPage() ? null : '100%'"
+            appearance="outline">
+            <mat-icon class="search-icon"> search </mat-icon>
+            <input
+              matInput
+              class="input-design search-input limited-input"
+              placeholder="{{ t('search.placeholder') }}"
+              [class.sample-images-keywords-search]="
+                isSampleImagesListPage() && displayedColumns[i] === 'keyWords'
+              "
+              [(ngModel)]="filterValues[displayedColumns[i]]"
+              (keyup)="filterData()" />
+            <mat-icon
+              class="search-icon"
+              style="cursor: pointer"
+              *ngIf="filterValues[displayedColumns[i]]"
+              (click)="clearFilter(i)">
+              close
+            </mat-icon>
+          </mat-form-field>
+          <ng-template #dropdown>
+            <mat-form-field
+              class="form-field filter-form-field select-form-field"
+              appearance="outline">
+              <mat-select
+                class="input-design search-input"
+                [(ngModel)]="filterValues[displayedColumns[i]]"
+                (selectionChange)="filterData()">
+                <mat-option class="input-design" value="">{{
+                  t('values.boolCols.all')
+                }}</mat-option>
+                <mat-option
+                  class="input-design"
+                  value="{{ t('values.boolCols.yes') }}"
+                  >{{
+                    t(
+                      displayedColumns[i].toLowerCase().includes('favorite')
+                        ? 'values.isFavorite.yes'
+                        : 'values.boolCols.yes'
+                    )
+                  }}</mat-option
+                >
+                <mat-option
+                  class="input-design"
+                  value="{{ t('values.boolCols.no') }}"
+                  >{{
+                    t(
+                      displayedColumns[i].toLowerCase().includes('favorite')
+                        ? 'values.isFavorite.no'
+                        : 'values.boolCols.no'
+                    )
+                  }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </ng-template>
+        </th>
+      </ng-container>
+
+      <!-- Table Headers and Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-header-row *matHeaderRowDef="filterColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td
+          *ngIf="dataSource.data.length === 0"
+          class="spinner-cell"
+          colspan="8">
+          <app-spinner [size]="32"></app-spinner>
+        </td>
+        <td
+          *ngIf="dataSource.data.length !== 0"
+          class="spinner-cell"
+          colspan="8">
+          <div class="mat-cell">{{ t('search.noData') }}</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <ng-template #editorContainer></ng-template>
+</div>

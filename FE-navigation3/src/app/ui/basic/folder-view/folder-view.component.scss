@@ -1,0 +1,116 @@
+.tree{
+  //padding: 5px;
+}
+
+.root-node {
+  border-top: 1.5px solid rgba(228, 228, 231, 1);
+}
+
+.root-node:last-of-type {
+  border-bottom: 1.5px solid rgba(228, 228, 231, 1);
+}
+
+.selected-node {
+  background-color: #0891B266;
+  font-weight: 500;
+}
+
+.node {
+  font-weight: 300;
+  padding: 1px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+
+  // Dynamic font-size based on content length
+  font-size: clamp(11px, calc(18px - 0.5px * min(14, max(0, length(attr(data-text))  - 10))), 15px);
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  &.lvl-1 {
+    // Scale down the base font size for level 1
+    font-size: clamp(10px, calc(17px - 0.5px * min(14, max(0, length(attr(data-text)) - 10))), 15px);
+  }
+
+  &.lvl-2 {
+    // Scale down further for level 2
+    font-size: clamp(9px, calc(15px - 0.5px * min(14, max(0, length(attr(data-text)) - 10))), 13px);
+  }
+
+  .node-icon {
+    margin-left: 15px;
+    margin-right: 10px;
+  }
+
+  .button-container {
+    margin-left: auto;
+    font-weight: bold;
+    font-size: 27px;
+    flex-shrink: 0;
+  }
+
+  .node-text {
+    //max-width: 150px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+  }
+
+}
+
+//Context menu styles
+::ng-deep .node-context-menu {
+  border-radius: 14px !important;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.menu-item{
+  display: flex;
+}
+
+::ng-deep .node-context-menu .mat-mdc-menu-content {
+  padding: 8px 0;
+}
+
+::ng-deep .node-context-menu .mat-mdc-menu-item {
+  min-height: 37px !important;
+  line-height: 37px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 15px !important;
+}
+
+::ng-deep .node-context-menu .mat-mdc-menu-item .menu-icon {
+  color: #2D5F72; /* Teal blue color as shown in your image */
+  height: 24px;
+  width: 24px;
+  scale: 0.93;
+  padding: 3px !important;
+  margin-right: 0 !important;
+  order: 2;
+}
+
+::ng-deep .node-context-menu .mat-mdc-menu-item span {
+  //margin-right: auto;
+  color: #2D5F72;
+  font-size: 15px !important;
+
+  flex: 1;
+}
+
+::ng-deep .mat-mdc-menu-panel.node-context-menu {
+  min-width: 170px;
+  max-width: 190px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

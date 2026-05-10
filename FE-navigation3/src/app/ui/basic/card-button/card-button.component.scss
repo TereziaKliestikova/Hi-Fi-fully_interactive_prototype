@@ -1,0 +1,90 @@
+.app-card-button {
+  height: auto;
+  border-radius: 10px;
+  max-width: 330px;
+  padding: 5px 15px;
+  border: solid 2px transparent;
+}
+
+.app-card-button .container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding: 0 15px;
+}
+
+.app-card-button:focus {
+  border: 2px #0891b2 solid;
+}
+
+.app-card-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.outline {
+  border: 2px #0891b2 solid;
+}
+
+.large {
+  .padding-left {
+    padding-left: 35px;
+  }
+
+  .padding-right {
+    padding-right: 35px;
+  }
+}
+
+.small {
+  .container{
+    padding: 3px 5px;
+  }
+  &.outline {
+    border: 1.5px #0891b2 solid;
+  }
+  .padding-left {
+    padding-left: 10px;
+  }
+
+  .padding-right {
+    padding-right: 10px;
+  }
+}
+
+.nano {
+  .container{
+    padding: 0 5px;
+  }
+  &.outline {
+    border: 1.5px #0891b2 solid;
+  }
+  .padding-left {
+    padding-left: 10px;
+  }
+
+  .padding-right {
+    padding-right: 10px;
+  }
+}
+
+
+
+
+.app-card-button .container .title {
+  font-size: 1.9rem;
+  font-weight: 500;
+  margin: auto;
+  color: #155e75;
+  text-align: center;
+}
+
+.app-card-button .container .icon {
+  object-fit: contain;
+}
+
+.bold {
+  font-weight: bold;
+  letter-spacing: 0;
+}

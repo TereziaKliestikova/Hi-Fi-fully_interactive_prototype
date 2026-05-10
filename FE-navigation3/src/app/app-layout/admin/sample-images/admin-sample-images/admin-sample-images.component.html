@@ -1,0 +1,489 @@
+<div>
+  <div
+    class="header-container"
+    *transloco="let t; read: 'admin.samplesList.header'">
+    <div class="button-container">
+      <!--      <app-card-button-->
+      <!--        [title]="t('buttons.organ')"-->
+      <!--        imageUrl="/assets/home/organ.svg"-->
+      <!--        imageOrder="last"></app-card-button>-->
+      <!--      <app-card-button-->
+      <!--        imageOrder="last"-->
+      <!--        [title]="t('buttons.bodySystem')"-->
+      <!--        imageUrl="/assets/home/system.svg"></app-card-button>-->
+      <!--      <app-card-button-->
+      <!--        [title]="t('buttons.addSample')"-->
+      <!--        [fontSize]="20"-->
+      <!--        imageUrl="/assets/sample-image/addsample.svg"-->
+      <!--        imageOrder="first"-->
+      <!--        [outline]="true"></app-card-button>-->
+    </div>
+
+    <app-flags
+      [flags]="flags"
+      (openAddFlagModal)="showModal = true"
+      (openEditFlagsModal)="showEdit = true"
+      class="flags-component">
+    </app-flags>
+    <app-edit-flags
+      *ngIf="showEdit"
+      class="absolute"
+      [flags]="flags"
+      (closeComponent)="showEdit = false"
+      (delete)="onFlagDelete($event)"
+      (edit)="onFlagEdit($event)">
+    </app-edit-flags>
+    <app-add-flags
+      *ngIf="showModal"
+      class="absolute"
+      [alreadyUsedColors]="getUsedColors()"
+      (closeComponent)="showModal = false"
+      (create)="onFlagCreated($event)">
+    </app-add-flags>
+  </div>
+
+  <div
+    *ngIf="currentEditRow"
+    class="editor-overlay"
+    (keyup)="closeTagsEditor()"
+    (click)="closeTagsEditor()"
+    tabindex="0"
+    (contextmenu)="
+      this.currentEditRow = null;
+      this.currentEditColumn = null;
+      this.editConfirm = false
+    "></div>
+
+  <div
+    #tableContainer
+    class="samples-table"
+    style="position: relative"
+    *transloco="let t; read: 'admin.samplesList.table'">
+    <button
+      class="floating-action-btn"
+      *ngIf="
+        (currentEditColumn !== null &&
+          currentEditColumn !== 'Tags' &&
+          currentEditColumn !== 'Caustry' &&
+          !editConfirm) ||
+        (currentEditColumn !== null &&
+          currentEditColumn === 'Caustry' &&
+          !editConfirm &&
+          currentEditRow &&
+          currentEditRow.caustryFile)
+      "
+      [style.top.px]="editorTop"
+      [style.left.px]="editorLeft"
+      (click)="onEditConfirm()">
+      {{
+        currentEditColumn === 'Caustry'
+          ? t('columns.deleteButton')
+          : t('columns.editButton')
+      }}
+    </button>
+
+    <app-modal-actions-confirmation
+      *ngIf="editConfirm && currentEditColumn === 'Caustry'"
+      [config]="modalConfirmConfig"
+      (confirm)="onConfirmDeleteCaustry()"
+      (cancel)="onCancelModalCaustry()">
+    </app-modal-actions-confirmation>
+
+    <div
+      class="organDropdownWrapper"
+      [style.top.px]="editorTop"
+      [style.left.px]="editorLeft"
+      *ngIf="editConfirm && currentEditColumn === 'Name' && currentEditRow">
+      <mat-form-field
+        class="note-form-field form-field filter-form-field"
+        appearance="outline">
+        <input
+          matInput
+          class="input-design"
+          placeholder="currentEditRow.name"
+          [(ngModel)]="currentEditRow.name"
+          (blur)="saveNameChanges()"
+          (keydown.enter)="saveNameChanges()" />
+      </mat-form-field>
+    </div>
+
+    <div
+      class="organDropdownWrapper"
+      [style.top.px]="editorTop"
+      [style.left.px]="editorLeft"
+      *ngIf="editConfirm && currentEditColumn === 'Organ'">
+      <mat-form-field
+        appearance="outline"
+        class="form-field filter-form-field select-form-field organ-dropdown">
+        <mat-select
+          placeholder="selectedOrgan"
+          [(value)]="selectedOrgan"
+          class="input-design search-input"
+          (selectionChange)="saveOrganChanges($event)">
+          <mat-option
+            *ngFor="let option of organs"
+            [value]="option.name"
+            class="input-design search-input">
+            {{ option.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div
+      #editorRef
+      *ngIf="currentEditRow !== null && currentEditColumn === 'Tags'"
+      class="floating-tag-editor"
+      [style.top.px]="editorTop"
+      [style.left.px]="editorLeft">
+      <app-edit-tags
+        [tagString]="currentEditRow.keyWords"
+        (tagStringChange)="saveTagChanges($event)"
+        (popupClose)="closeTagsEditor()">
+      </app-edit-tags>
+    </div>
+
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      [ngStyle]="{ 'font-size': '11px' }">
+      <!-- Visibility Column -->
+      <ng-container matColumnDef="navbar">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="icon-group header-button-style" *ngIf="isChecked">
+            <div class="select-all-container">
+              <mat-checkbox
+                [checked]="isAllSelected()"
+                [indeterminate]="isAllSelectedIndeterminate()"
+                (change)="toggleSelectAll()"></mat-checkbox>
+            </div>
+            <button 
+              mat-icon-button
+              (click)="modifySelectedSamplesAddToQueue('Selected', 'Publish')">
+              <mat-icon>lock_open</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              (click)="modifySelectedSamplesAddToQueue('Selected', 'SetPrivate')">
+              <mat-icon>lock</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              (click)="modifySelectedSamplesAddToQueue('Selected', 'Delete')">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <div appearance="outline" class="icon-group-row row-button-style">
+            <div>
+              <mat-checkbox
+                [checked]="isSampleSelected(row)"
+                (change)="selectSample(row)"></mat-checkbox>
+            </div>
+            <div>
+              <button
+                mat-icon-button
+                (click)="modifySelectedSamplesAddToQueue(row, 'ReverseVisibility')">
+                <mat-icon *ngIf="row.isVisible"> lock_open</mat-icon>
+                <mat-icon *ngIf="!row.isVisible"> lock</mat-icon>
+              </button>
+            </div>
+            <div>
+              <button mat-icon-button (click)="changeSampleFlag(row)">
+                <mat-icon
+                  *ngIf="row.flagType"
+                  [ngStyle]="{ color: row.flagType.color }">
+                  bookmark
+                </mat-icon>
+                <mat-icon *ngIf="!row.flagType">bookmark_border</mat-icon>
+              </button>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th
+          (contextmenu)="onRightClickDisContextMenu($event)"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header>
+          {{ t('columns.sampleName') }}
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          (click)="onRowClicked(row)"
+          style="cursor: pointer"
+          (contextmenu)="onRightClick($event, 'Name', row)">
+          {{ row.name }}
+        </td>
+      </ng-container>
+
+      <!-- Comments Column -->
+      <ng-container matColumnDef="hasAnnotation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.annotation') }}
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <span
+            [class]="['boolean-chip', row.hasAnnotation ? 'true' : 'false']">
+            {{ row.hasAnnotation ? t('values.yes') : t('values.no') }}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Caustry Name Column -->
+      <ng-container matColumnDef="caustryName">
+        <th
+          (contextmenu)="onRightClickDisContextMenu($event)"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header>
+          {{ t('columns.caustryName') }}
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          (contextmenu)="onRightClick($event, 'Caustry', row)">
+          <div class="caustry-cell-wrapper">
+            <a
+              *ngIf="
+                row.caustryFile &&
+                row.caustryFile.name !== 'progress' &&
+                row.caustryFile.name !== 'error'
+              "
+              [href]="getCaustryPath(row.caustryFile)"
+              target="_blank"
+              download="{{ row.caustryFile.name }}"
+              class="pdfNameFontCollor">
+              <mat-icon class="outlined-icon"
+                >insert_drive_file_border
+              </mat-icon>
+              {{ row.caustryFile.name }}
+            </a>
+            <mat-progress-spinner
+              *ngIf="row.caustryFile && row.caustryFile.name === 'progress'"
+              mode="indeterminate"
+              diameter="30"
+              color="primary">
+            </mat-progress-spinner>
+            <mat-icon
+              *ngIf="row.caustryFile && row.caustryFile.name === 'error'"
+              color="primary"
+              >cancel
+            </mat-icon>
+
+            <button
+              *ngIf="!row.caustryFile"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              [disableRipple]="true"
+              aria-label="More options"
+              class="three-dots-button">
+              <mat-icon>more_vert</mat-icon>
+              <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+                <button
+                  mat-menu-item
+                  [disableRipple]="true"
+                  (click)="addCaustryDialog(row)">
+                  <mat-icon>library_add</mat-icon>
+                  Vložiť súbor
+                </button>
+              </mat-menu>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Key Words Column -->
+      <ng-container matColumnDef="keyWords">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.keyWords') }}
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="toggleRow(row, $event)">
+          <div class="big-tags-container">
+            <div *ngIf="row.keyWords">
+              <ng-container
+                *ngFor="let tag of row.keyWords.split(';'); let j = index">
+                <span *ngIf="j < 2" class="firstLineTag">
+                  {{ tag }}
+                </span>
+              </ng-container>
+            </div>
+            <mat-icon class="dots-icon"> more_horiz</mat-icon>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Organ Column -->
+      <ng-container matColumnDef="organName">
+        <th
+          (contextmenu)="onRightClickDisContextMenu($event)"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header>
+          {{ t('columns.organ') }}
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let row"
+          (click)="onRowClicked(row)"
+          (contextmenu)="onRightClick($event, 'Organ', row)">
+          {{ row.organName }}
+        </td>
+      </ng-container>
+
+      <!-- System Column -->
+      <ng-container matColumnDef="bodySystemNames">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.systems') }}
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="onRowClicked(row)">
+          {{ row.bodySystemNames[0] }}
+        </td>
+      </ng-container>
+
+      <!-- Note Column -->
+      <ng-container matColumnDef="note">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.note') }}
+        </th>
+        <td mat-cell class="note-cell" *matCellDef="let row">
+          <mat-form-field
+            class="note-form-field form-field filter-form-field"
+            appearance="outline">
+            <input
+              matInput
+              class="input-design"
+              placeholder="{{ t('values.placeholder') }}"
+              [value]="filterHtmlTags(row.note)"
+              [disabled]="textEditorOpen"
+              (focus)="openEditor(row, $event.target)" />
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ t('columns.ID') }}
+        </th>
+        <td mat-cell *matCellDef="let row" (click)="onRowClicked(row)">
+          {{ row.id }}
+        </td>
+      </ng-container>
+
+      <!-- Table Headers and Rows -->
+      <!-- <tr mat-header-row *matHeaderRowDef="['test1', 'test2']"></tr> -->
+      <!-- Search header -->
+      <ng-container
+        *ngFor="
+          let filterColumn of filterColumns;
+          let i = index;
+          let last = last
+        "
+        [matColumnDef]="filterColumn">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-form-field
+            *ngIf="
+              !checkIfBooleanColumn(i) && !checkSettingsColumn(i);
+              else dropdownOrSettings
+            "
+            [ngClass]="{ 'id-filter-field': last }"
+            class="form-field filter-form-field search-input"
+            appearance="outline">
+            <mat-icon matPrefix class="search-icon"> search</mat-icon>
+            <input
+              matInput
+              class="input-design search-input limited-input"
+              placeholder="{{ t('search.placeholder') }}"
+              [(ngModel)]="filterValues[displayedColumns[i]]"
+              (keyup)="filterData()" />
+            <mat-icon
+              class="search-icon"
+              style="cursor: pointer"
+              *ngIf="filterValues[displayedColumns[i]]"
+              (click)="clearFilter(i)">
+              close
+            </mat-icon>
+          </mat-form-field>
+          <ng-template #dropdownOrSettings>
+            <div
+              *ngIf="checkSettingsColumn(i); else dropdown"
+              appearance="outline"
+              class="icon-group-second-header">
+              <div>
+                <mat-checkbox
+                  [checked]="isSampleSelected('All')"
+                  (change)="selectSample('All')"></mat-checkbox>
+              </div>
+              <div>
+                {{ t('columns.visibility') }}
+              </div>
+              <div>
+                {{ t('columns.flag') }}
+              </div>
+            </div>
+            <ng-template #dropdown>
+              <mat-form-field
+                class="form-field filter-form-field select-form-field"
+                appearance="outline">
+                <mat-select
+                  class="input-design search-input"
+                  [(ngModel)]="filterValues[displayedColumns[i]]"
+                  (selectionChange)="filterData()">
+                  <mat-option class="input-design" value="">
+                    {{ t('values.boolCols.all') }}
+                  </mat-option>
+                  <mat-option
+                    class="input-design"
+                    value="{{ t('values.boolCols.yes') }}"
+                    >{{ t('values.boolCols.yes') }}
+                  </mat-option>
+                  <mat-option
+                    class="input-design"
+                    value="{{ t('values.boolCols.no') }}">
+                    {{ t('values.boolCols.no') }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-template>
+          </ng-template>
+        </th>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-header-row *matHeaderRowDef="filterColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td
+          *ngIf="dataSource.data.length === 0"
+          class="spinner-cell"
+          colspan="9">
+          <app-spinner [size]="32"></app-spinner>
+        </td>
+        <td
+          *ngIf="dataSource.data.length !== 0"
+          class="spinner-cell"
+          colspan="9">
+          <div class="mat-cell">{{ t('search.noData') }}</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="notification-container">
+    <div *ngFor="let notification of notifications; let i = index">
+      <app-admin-notification
+        [message]="notification.message"
+        [duration]="5001"
+        [isUndoRequired]="(notification.timeoutId ?? 0) > 0"
+        (closed)="handleClosedNotifications($event)"></app-admin-notification>
+    </div>
+  </div>
+  <ng-template #editorContainer></ng-template>
+</div>

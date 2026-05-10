@@ -1,0 +1,34 @@
+<div class="flags-container" *transloco="let t; read: 'admin.flagsComponent'">
+  <!-- Header -->
+  <div class="header">
+    <p class="title">{{ t('title') }}</p>
+    <button style="margin-left: -10px" mat-icon-button (click)="onEditClick()">
+      <mat-icon>edit_outline</mat-icon>
+    </button>
+    <button style="margin-left: -18px" mat-icon-button (click)="onAddClick()">
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+  </div>
+  <!-- Flags -->
+  <div class="flags">
+    <ng-container *ngFor="let flag of flags">
+      <mat-chip
+        class="mat-chip"
+        [ngClass]="flag.color"
+        color="primary"
+        selected
+        (click)="onFlagClick(flag)">
+        <div class="flag-chip">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Flag"
+            [ngStyle]="{ color: flag.color }"
+            class="flag-icon"
+            >bookmark</mat-icon
+          >
+          <p class="flag-name">{{ flag.name }}</p>
+        </div>
+      </mat-chip>
+    </ng-container>
+  </div>
+</div>

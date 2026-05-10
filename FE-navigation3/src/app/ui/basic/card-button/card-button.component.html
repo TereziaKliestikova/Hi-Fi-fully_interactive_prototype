@@ -1,0 +1,35 @@
+<button
+  mat-raised-button
+  extended
+  [disabled]="disabled"
+  class="app-card-button"
+  [ngStyle]="{ 'background-color': backgroundColor }"
+  [ngClass]="size"
+  [style.width]="width !== 0 ? width + 'px' : 'initial'"
+  [class.outline]="outline"
+  (click)="onClick()">
+  <div class="container">
+    <img
+      *ngIf="imageOrder === 'first'"
+      [style.height]="iconHeight"
+      class="icon"
+      src="{{ imageUrl }}"
+      alt=""
+      srcset="" />
+    <p
+      [class.padding-left]="imageOrder === 'first'"
+      [class.padding-right]="imageOrder === 'last'"
+      [class.bold]="bold"
+      [ngStyle]="{ 'font-size.px': fontSize, color: color }"
+      class="title">
+      {{ title }}
+    </p>
+    <img
+      *ngIf="imageOrder === 'last'"
+      [style.height]="iconHeight"
+      class="icon"
+      src="{{ imageUrl }}"
+      alt=""
+      srcset="" />
+  </div>
+</button>

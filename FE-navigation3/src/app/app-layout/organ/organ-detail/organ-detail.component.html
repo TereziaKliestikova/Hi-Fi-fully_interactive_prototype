@@ -1,0 +1,22 @@
+<div style="margin: 1em">
+  <app-breadcrumb />
+</div>
+
+<ng-container *ngIf="organDescription; else loading">
+  <app-description
+    [description]="organDescription"
+    [pdf]="organPdf"
+    [staticIconEndpoint]="staticIconEndpoint">
+  </app-description>
+
+  <app-basic-table
+    [dataSource]="dataSource"
+    [displayedColumns]="displayedColumns"
+    [showDiagnosis]="showDiagnosis"
+    [isPdfAttached]="organPdf ? true : false">
+  </app-basic-table>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner size="75"></app-spinner>
+</ng-template>

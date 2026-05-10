@@ -1,0 +1,22 @@
+<div style="margin: 1em">
+  <app-breadcrumb />
+</div>
+
+<ng-container *ngIf="systemDescription; else loading">
+  <app-description
+    [description]="systemDescription"
+    [pdf]="systemPdf"
+    [staticIconEndpoint]="staticIconEndpoint">
+  </app-description>
+
+  <app-basic-table
+    [dataSource]="dataSource"
+    [displayedColumns]="displayedColumns"
+    [showDiagnosis]="showDiagnosis"
+    [isPdfAttached]="systemPdf ? true : false">
+  </app-basic-table>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner size="75"></app-spinner>
+</ng-template>

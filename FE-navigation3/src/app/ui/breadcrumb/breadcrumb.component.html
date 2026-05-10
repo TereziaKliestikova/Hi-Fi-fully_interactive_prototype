@@ -1,0 +1,12 @@
+<ul>
+  <ng-container *ngFor="let crumb of breadcrumbs">
+    <li *ngIf="(crumb.label | async) !== 'route.undefined'">
+      <a [routerLink]="crumb.url || undefined">
+        @if (crumb.icon) {
+          <mat-icon>{{ crumb.icon }}</mat-icon>
+        }
+        {{ crumb.label | async }}
+      </a>
+    </li>
+  </ng-container>
+</ul>

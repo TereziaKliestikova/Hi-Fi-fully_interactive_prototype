@@ -1,0 +1,161 @@
+# HIPA-FE
+
+## Running for the first time
+
+There are two ways of running the backend, through **Docker** and **locally**.
+
+### Shared prerequisites
+
+- Cloned repositories
+  - [HIPA-FE](https://github.com/FIIT-HIPA/HIPA-FE)
+  - [HIPA-Deploy](https://github.com/FIIT-HIPA/HIPA-Deploy)
+
+### Running the frontend
+
+### Docker
+
+**Prerequisites:**
+
+- [Docker](https://www.docker.com/)
+
+**Steps:**
+
+- Navigate to `HIPA-Deploy` repository root folder
+- Do either of the following:
+  - To run frontend as a live server (any changes in code will take an effect without you recreating the container)
+    - Run `docker compose up -d --build --force-recreate`
+  - To compile the frontend (in case you are facing stability or performance issues)
+    - Run `docker compose --file docker-compose_build.yml up -d --build --force-recreate`
+
+> Alternatively, you can use `HIPA-FE/docker-compose.yml`/`HIPA-FE/Dockerfile`/`HIPA-FE/Dockerfile_mount` files.
+
+### Locally
+
+**Prerequisites:**
+
+- `npm` installed
+  - For windows you can use: [https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)
+  - Use the following commands after installing nvm:
+  - Run `nvm install 20.18.0`
+  - Run `nvm use 20.18.0`
+- Angular CLI installed
+  - Run `npm install -g @angular/cli`
+
+**Steps:**
+
+- Run `npm ci` to install packages
+- Run `ng serve --configuration development --open`
+
+## How to generate api folder
+
+To standardize the code and approach behind reaching out to the backend, we are generating the necessary objects and functions using `ng-openapi-gen` tool. The tool leverages generated Swagger documentation available on the backend.
+
+### Prerequisites
+
+- `npm` installed
+  - For windows you can use: [https://github.com/coreybutler/nvm-windows](https://github.com/coreybutler/nvm-windows)
+  - Use the following commands after installing nvm:
+  - Run `nvm install 20.18.0`
+  - Run `nvm use 20.18.0`
+- `ng-openapi-gen` installed
+  - Assuming you have `npm` installed and available:
+  - Run `npm install -g ng-openapi-gen`
+- Backend running with Swagger available
+  - See documentation for running the backend and Swagger: [https://hipa2024.atlassian.net/wiki/spaces/HIPA/pages/22380567/abc](https://hipa2024.atlassian.net/wiki/spaces/HIPA/pages/22380567/abc)
+
+### Steps
+
+- Verify that Swagger is available through browser
+  - This should be at <base_url>/swagger, for example: [http://localhost:5255/swagger/index.html](http://localhost:5255/swagger/index.html)
+- Navigate to HIPA-FE root directory
+- Run `ng-openapi-gen -i "http://localhost:5255/swagger/v1/swagger.json" -o ./src/app/api`
+  > Modify the `ng-openapi-gen -i` argument accordingly
+- OR
+- Run shell script `generate_api.sh`
+  - The script has an optional argument which is the url to swagger json file (default is localhost)
+
+## Useful commands
+
+- create a new component
+  ```shell
+    ng generate component <component-name>
+  ```
+- create a new service
+  ```shell
+    ng generate service <service-name>
+  ```
+- create a new module
+  ```shell
+    ng generate module <module-name>
+  ```
+- create a new pipe
+  ```shell
+    ng generate pipe <pipe-name>
+  ```
+
+## Project information
+
+- for generic components like buttons, inputs, etc. use angular material wrapped by our own components in `src/app/ui/`
+
+## Useful links
+
+- angular documentation: https://angular.io/docs
+- angular material: https://material.angular.io/
+
+## Translations
+
+We are using `Transloco` library, link to doc can be found [here](https://ngneat.github.io/transloco/)
+
+We will be using [Structural directives](https://ngneat.github.io/transloco/docs/structural-directives) to translate our templates
+
+For translations in typescript files we have to use `TranslocoService`
+which has to be injected in the constructor of the component/service,
+example of this can be found in `src/app/auth/registration/RegistrationComponent.ts`.
+This is basically creating async translation that is passed to the template
+and rendered through pipe `| async`.
+
+To add new translations we have to add new entry in `src/assets/i18n/sk.json` file.
+
+Naming convention for keys is path to the component/service where we want to use this translation
+and then the name of the translation in context of this component/service, see examples in translation file.
+
+## Environment variables
+
+We are using baked in angular environment variables, more info can be found [here](https://angular.io/guide/build#configuring-application-environments).
+
+We currently have 2 environments, `development` and `production`.
+
+To add new environment variable we have to add it to `src/environments/environment.ts` and `src/environments/environment.development.ts` files.
+You have to add it to both files, because `ng lint` will complain if you reference variable that is not in default (production) file.
+
+If you do not have value for the variable in `production` environment, put there some dummy value.
+
+---
+
+# Autogenerated documentation:
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

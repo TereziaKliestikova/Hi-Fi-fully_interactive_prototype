@@ -1,0 +1,14 @@
+.view {
+  .catalog {
+    padding: 0 1rem;
+    box-shadow: 0 2px 8px -1px #1e293b1f;
+    border-radius: 10px;
+    border-width: 2px;
+    background-color: white;
+
+    .item-grid {
+      overflow: auto;
+      max-height: calc(100vh - 240px);
+    }
+  }
+}

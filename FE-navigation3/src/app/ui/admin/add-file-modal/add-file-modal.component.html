@@ -1,0 +1,50 @@
+<div class="dialog-container" *transloco="let t; read: 'admin.fileUploadModal'">
+  <button class="close-btn" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <div class="content-wrapper">
+    <h2 class="dialog-title-text" mat-dialog-title>{{ t('headerTitle') }}</h2>
+
+    <mat-dialog-content class="dialog-content">
+      <p>
+        <strong>{{ t(data.labelkey) }}:</strong> {{ data.text }}
+      </p>
+      <div>
+        <p class="info-text" [class.invalid]="touched && !selectedFile">
+          * {{ t('selectNotification') }}
+        </p>
+
+        <div
+          class="file-upload-button"
+          tabindex="0"
+          (click)="fileInput.click()"
+          (keyup.enter)="fileInput.click()">
+          <input
+            type="file"
+            hidden
+            id="CaustryFile"
+            (click)="onInputClicked()"
+            (change)="onFileSelected($event)"
+            #fileInput />
+          <mat-icon>library_add</mat-icon>
+          <span *ngIf="selectedFile; else noFile">
+            {{ selectedFile.name }}
+          </span>
+          <ng-template #noFile>
+            <span
+              ><strong>{{ t('findFileBold') }}</strong>
+              {{ t('findFileNormal') }}</span
+            >
+          </ng-template>
+        </div>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="dialog-actions">
+      <button class="submit-btn" (click)="submit()">
+        {{ t('submitFile') }}
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="layout">
+  <app-header class="header" />
+  <div class="content">
+    <app-upload-progress></app-upload-progress>
+    <app-sample-upload *ngIf="modalService.isOpen$ | async"></app-sample-upload>
+    <router-outlet />
+  </div>
+</div>

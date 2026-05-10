@@ -1,0 +1,530 @@
+{
+  "auth": {
+    "registration": {
+      "title": "Registrácia",
+      "alreadyRegistered": {
+        "text": "Už ste registrovaný?",
+        "link": "Prihláste sa"
+      },
+      "form": {
+        "firstName": {
+          "label": "Meno",
+          "placeholder": "Zadajte meno"
+        },
+        "lastName": {
+          "label": "Priezvisko",
+          "placeholder": "Zadajte priezvisko"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Zadajte email"
+        },
+        "password": {
+          "label": "Heslo",
+          "placeholder": "Zadajte heslo"
+        },
+        "passwordConfirm": {
+          "label": "Heslo znova",
+          "placeholder": "Zadajte heslo znova"
+        },
+        "submit": "Registrovať sa",
+        "success": {
+          "title": "Registrácia prebehla úspešne",
+          "instructions": {
+            "textFirst": "Na Váš e-mail sme odoslali overovací odkaz.",
+            "textSecond": "Pre dokončenie registrácie kliknite na tento odkaz.",
+            "textThird": "Po úspešnom overení sa budete môcť prihlásiť.",
+            "link": "[Prihlásiť sa]"
+          }
+        }
+      }
+    },
+    "login": {
+      "title": "Prihlásenie",
+      "notRegistered": {
+        "text": "Ešte nie ste registrovaný?",
+        "link": "Registrovať"
+      },
+      "requestPasswordChange": {
+        "link": "Zabudli ste heslo?"
+      },
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Zadajte email"
+        },
+        "password": {
+          "label": "Heslo",
+          "placeholder": "Zadajte heslo"
+        },
+        "submit": "Prihlásiť sa"
+      },
+      "emailVerification": {
+        "verified": "Váš email bol úspešne overený",
+        "alreadyVerified": "Váš email už bol overený",
+        "invalidToken": "Neplatný overovací token",
+        "unknownStatus": "Neznámy overovací status"
+      }
+    },
+    "requestChangePassword": {
+      "title": "Zabudnuté heslo",
+      "backToLogin": {
+        "link": "Späť"
+      },
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Zadajte email"
+        },
+        "submit": "Zaslať overovací email",
+        "success": {
+          "title": "Zmena hesla prebehla úspešne",
+          "instructions": {
+            "text": "Na Vašu emailovú adresu sme zaslali ďalšie informácie ohľadom zmeny hesla."
+          }
+        }
+      }
+    },
+    "changePassword": {
+      "title": "Zmeniť heslo",
+      "backToLogin": {
+        "link": "Späť na Prihlásenie"
+      },
+      "form": {
+        "password": {
+          "label": "Heslo",
+          "placeholder": "Zadajte heslo"
+        },
+        "passwordConfirm": {
+          "label": "Heslo znova",
+          "placeholder": "Zadajte heslo znova"
+        },
+        "submit": "Zmeniť heslo",
+        "success": {
+          "title": "Zmena hesla prebehla úspešne",
+          "instructions": {
+            "text": "Vaše heslo bolo úspešne zmenené, môžete sa prihlásiť cez v rozhraní pre prihlásenie."
+          }
+        }
+      }
+    }
+  },
+  "dashboard": {
+    "header": {
+      "dropDown": {
+        "logOut": "Odhlásiť sa"
+      },
+      "admin": {
+        "sampleUpload": "Vložiť snímku"
+      }
+    },
+    "tabs": {
+      "organ": {
+        "title": "Orgán"
+      },
+      "system": {
+        "title": "Systém"
+      },
+      "learning": {
+        "title": "Výučba"
+      }
+    },
+    "catalog": {
+      "catalog-tool-bar": {
+        "textSearchInput": "Hľadať podľa názvu",
+        "diagnosisSearchSelect": "Hľadať podľa kľúčových slov"
+      },
+      "catalog-no-items": "Zadaným parametrom nevyhovujú žiadne záznamy."
+    }
+  },
+  "learning": {
+    "studyTypes": {
+      "pregradual": "Pregraduálne štúdium",
+      "postgradual": "Postgraduálne štúdium"
+    },
+    "studyPage": {
+      "status": "Status",
+      "description": "Anotácie",
+      "optional": "Nepovinný",
+      "keywords": "Kľúčové slová",
+      "categories": {
+        "files": "Súbory",
+        "folders": "Priečinky",
+        "images": "Snímky"
+      },
+      "statusTypes": {
+        "public": "Verejný",
+        "private": "Súkromný"
+      },
+      "actions": {
+        "newFolder": "Nový priečinok",
+        "hideFolder": "Skryť priečinok",
+        "publishFolder": "Zverejnit priečinok",
+        "insertFile": "Vložiť súbor",
+        "createFolder": "Vytvoriť priečinok",
+        "selectImage": "Vybrať snímky",
+        "createNewFolder": "Vytvoriť",
+        "cancel": "Zrušiť",
+        "deleteImages": "Odstrániť snímky",
+        "deleteFolder": "Odstrániť priečinok",
+        "deleteFile": "Odstrániť súbor"
+      },
+      "dialog": {
+        "confirmPublishQuestion": "Naozaj chcete publikovať tento priečinok so všetkým jeho obsahom?",
+        "privateParents": "Táto akcia publikuje aj nasledujúce nadradené priečinky",
+        "confirmDeleteFolderQuestion": "Naozaj chcete odstrániť nasledujúci priečinok so všetkými jeho položkami?",
+        "confirmDeleteFileQuestion": "Naozaj chcete odstrániť nasledujúci súbor?",
+        "confirmDeleteSampleImagesQuestion": "Naozaj chcete odstrániť tieto snímky z priečinka?"
+      },
+      "placeholders": {
+        "emptyFiles": "Sekcia momentálne neobsahuje žiadne súbory.",
+        "emptyFolders": "Sekcia momentálne neobsahuje žiadne pričinky.",
+        "emptySampleImages": "Sekcia momentálne neobsahuje žiadne snímky."
+      },
+      "notifications": {
+        "sampleImagesDeleted": "Snímky boli úspešne odstránené",
+        "foldersPublished": "Priečinok/priečinky boli úspešne publikované",
+        "folderHiddenPostfix": " bol nastavený ako súkromný",
+        "deletedSuccessfullyPostfix": " bol úspešne odstránený"
+      }
+    },
+    "folderViewComponent": {
+      "actions": {
+        "publish": "Zverejniť",
+        "hide": "Skryť",
+        "newFolder": "Nový priečinok",
+        "delete": "Odstrániť"
+      }
+
+    },
+    "sampleSelectorComponent": {
+      "header": {
+        "title": "Vyberte snímky",
+        "subtitle": "Počet vybraných snímok: {{count}}"
+      },
+      "actions": {
+        "back": "Späť",
+        "insertSelected": "Vložiť vybrané snímky"
+      },
+      "modal": {
+        "warningMessage": "Váš výber snímok nebol vložený do súboru.",
+        "cancel": "Opustiť stránku",
+        "confirm": "Vložiť výber"
+      }
+    }
+
+  },
+  "home": {
+    "title": "Histopatologický atlas",
+    "content": "Obsah",
+    "addsamplebutton": "Pridať novú snímku",
+    "welcomeMessage": {
+      "paragraph1": "Vitajte na našej stránke, kde sme sa venovali tvorbe jedinečného histopatologického atlasu. Histopatológia je fascinujúcim oborom, ktorý sa zaoberá štúdiom tkanív a buniek a ich patologických zmien. Naším cieľom je poskytnúť odborníkom, študentom a záujemcom o medicínu prístup k bohatému zdroju obrázkov a informácií, ktoré im pomôžu lepšie porozumieť rôznym histologickým nálezom.",
+      "paragraph2": "Náš atlas obsahuje širokú škálu histopatologických prípadov, zahŕňajúcich rôzne orgány a tkanivá. Každý prípad je podrobne zdokumentovaný, s vysokokvalitnými obrázkami a popisom histologických charakteristík. Veríme, že tento atlas bude užitočným nástrojom pre vzdelávanie, výskum a diagnostiku v oblasti histopatológie."
+    },
+    "tiles": {
+      "classwork": {
+        "title": "Výučba",
+        "description": "Digitalizované preparáty radené podľa sylabu vysokej školy."
+      },
+      "tasks": {
+        "title": "Úlohy",
+        "description": "Digitalizované preparáty so zadanými úlohami na vypracovanie.",
+        "admindescription": "Vytvorené a vypracované úlohy študentami."
+      },
+      "samples": {
+        "title": "Snímky",
+        "description": "Zoznam digitalizovaných preparátov."
+      },
+      "materials": {
+        "title": "Materiály",
+        "description": "Materiály príslušajúce jednotlivým témam vyučovania."
+      }
+    }
+  },
+  "samples": {
+    "tiles": {
+      "allSamples": {
+        "title": "Všetky snímky",
+        "description": "Zoznam všetkých digitalizovaných preparátov."
+      },
+      "organ": {
+        "title": "Orgán",
+        "description": "Histopatologické prípady zamerané na rôzne orgány a tkanivá."
+      },
+      "system": {
+        "title": "Systém",
+        "description": "Digitalizované preparáty zoradené v skupinách podľa systémov."
+      },
+      "classwork": {
+        "title": "Výučba",
+        "description": "Digitalizované preparáty radené podľa sylabu vysokej školy."
+      },
+      "tasks": {
+        "title": "Úlohy",
+        "description": "Digitalizované preparáty so zadanými úlohami na vypracovanie.",
+        "admindescription": "Vytvorené a vypracované úlohy študentami."
+      },
+      "samples": {
+        "title": "Snímky",
+        "description": "Zoznam digitalizovaných preparátov."
+      },
+      "materials": {
+        "title": "Materiály",
+        "description": "Materiály príslušajúce jednotlivým témam vyučovania."
+      }
+    }
+  },
+  "admin": {
+    "sampleUpload": {
+      "title": "Nová snímka",
+      "form": {
+        "sampleImage": {
+          "label": "Nahrať snímku",
+          "placeholder": "Vyhľadajte súbor"
+        },
+        "sampleImageFileName": {
+          "label": "Názov súboru"
+        },
+        "keyWords": {
+          "label": "Kľúčové slová"
+        },
+        "annotationFile": {
+          "label": "Nahrať anotáciu",
+          "placeholder": "Vyhľadajte súbor"
+        },
+        "newOrgan": {
+          "label": "Nový orgán",
+          "placeholder": "Zadajte názov nového orgánu"
+        },
+        "organ": {
+          "label": "Orgán"
+        },
+        "newSystem": {
+          "label": "Nový systém",
+          "placeholder": "Zadajte názov nového systému"
+        },
+        "system": {
+          "label": "Systém"
+        },
+        "submitSampleImage": "Vložiť snímku",
+        "submit": "Vložiť snímku"
+      },
+      "uploadProgress": {
+        "upload": "Nahrávanie",
+        "cancel": "Zrušiť"
+      }
+    },
+    "samplesList": {
+      "header": {
+        "buttons": {
+          "organ": "Orgán",
+          "bodySystem": "Systém",
+          "addSample": "Pridať novú snímku"
+        }
+      },
+      "table": {
+        "columns": {
+          "ID": "ID",
+          "isFavorite": "Obľúbené",
+          "caustryName": "Kazuistika",
+          "sampleName": "Názov snímky",
+          "comments": "Komentár",
+          "annotations": "Anotácia",
+          "keyWords": "Kľúčové slová",
+          "note": "Poznámky",
+          "visibility": "Pristup",
+          "flag": "Stitok",
+          "organ": "Organ",
+          "systems": "Systém",
+          "annotation": "Anotácie",
+          "editButton": "Upraviť",
+          "deleteButton": "Odstrániť",
+          "cancel": "Zrušiť"
+        },
+        "values": {
+          "yes": "Áno",
+          "no": "Nie",
+          "placeholder": "Vložte poznámku",
+          "boolCols": {
+            "yes": "Áno",
+            "no": "Nie",
+            "all": "Všetko"
+          },
+          "isFavorite": {
+            "yes": "❤️",
+            "no": "🤍"
+          }
+        },
+        "search": {
+          "placeholder": "Vyhľadávanie",
+          "noData": "Zadaným požiadavkám nevyhovujú žiadne záznamy."
+        }
+      }
+    },
+    "flagsComponent": {
+      "title": "Štítky",
+      "chooseColor": "Vyberte farbu štítku:"
+    },
+    "editTags": {
+      "addTag": "Pridať kľúčové slovo",
+      "tagsNotFound": "Zatiaľ neexistujú žiadne kĺúčové slová"
+    },
+    "editFlagsComponent": {
+      "titleMainModalDeleteConfirm": "Odstrániť štítok",
+      "textMainModalDeleteConfirm": "Chcete odstrániť štítok",
+      "cancel": "Zrušiť",
+      "delete": "Odstrániť"
+    },
+    "addFlagsComponent": {
+      "title": "Nový štítok",
+      "addFlagTitle": "Vložte názov nového štítku:",
+      "addFlagColor": "Vyberte farbu štítku:",
+      "clean": "Zrušiť",
+      "create": "Vytvoriť",
+      "warning": "Vyplňte názov a vyberte farbu štítku!",
+      "placeholder": "Zadajte názov"
+    },
+    "adminNotification": {
+      "selectedItems": "Označené položky",
+      "wasDeleted": "boli odstránené.",
+      "setAsPrivate": "boli označené ako súkromné.",
+      "setAsPublic": "boli označené ako verejné.",
+      "undoAction": "Akcia bola vrátená",
+      "undo": " Späť"
+    },
+    "confirmModal": {
+      "titleMainDeleteConfirm": "Odstrániť súbor",
+      "textMainDeleteConfirm": "Naozaj chcete odstrániť súbor {{file}}?",
+      "delete": "Odstrániť",
+      "cancel": "Zrušiť"
+    },
+    "fileUploadModal": {
+      "caustryLabel": "Názov snímky",
+      "folderFileLabel": "Názov priečinka",
+      "headerTitle": "Nový súbor",
+      "selectNotification": "Vložte príslušajúci súbor",
+      "findFileBold": "Vyhľadajte",
+      "findFileNormal": "súbor",
+      "submitFile": "Vložiť Súbor"
+    }
+  },
+  "basic": {
+    "ui": {
+      "forms": {
+        "input": {
+          "errors": {
+            "required": "Povinné pole",
+            "email": "Email je neplatný",
+            "minlength": "Minimálna dĺžka hesla je {{requiredLength}} znakov",
+            "specialSym": "Heslo musí obsahovať špeciálne znaky",
+            "upperCaseLetter": "Heslo musí obsahovať veľké písmená",
+            "name": "Meno musí začínať veľkým písmenom",
+            "weakPassword": "Heslo musí obsahovať čísla",
+            "passwordMismatch": "Heslá sa nezhodujú"
+          }
+        }
+      },
+      "header": {
+        "nav": {
+          "sampleImage": "Snímky",
+          "organ": "Orgán",
+          "system": "Systém",
+          "classwork": "Výučba",
+          "tasks": "Úlohy"
+        }
+      }
+    }
+  },
+  "api": {
+    "error": {
+      "serverError": "Nastala chyba na serveri, skúste to prosím neskôr",
+      "unknownError": "Neočakávaná chyba, skúste to prosím neskôr",
+      "registration": {
+        "userAlreadyExists": "Užívateľ s týmto emailom už existuje",
+        "invalidForm": "Zadali ste neplatné údaje do formulára"
+      },
+      "login": {
+        "invalidUserCredentials": "Zadali ste nesprávny email alebo heslo",
+        "emailNotVerified": "Email ešte nebol overený, skontrolujte si email a overte ho kliknutím na odkaz v ňom"
+      },
+      "requestChangePassword": {
+        "invalidForm": "Zadali ste neplatné údaje do formulára"
+      },
+      "changePassword": {
+        "invalidResetPasswordToken": "Platnosť odkazu na obnovenie hesla vypršala.",
+        "invalidPassword": "Zadané heslo nespĺňa požiadavky na heslo.",
+        "invalidForm": "Zadali ste neplatné údaje do formulára"
+      }
+    }
+  },
+  "organDetail": {
+    "table": {
+      "columns": {
+        "isFavorite": "Obľúbené",
+        "caustryName": "Kazuistika",
+        "sampleName": "Názov snímky",
+        "annotations": "Anotácie",
+        "keyWords": "Kľúčové slová",
+        "note": "Poznámky",
+        "organ": "Organ",
+        "systems": "Systém"
+      },
+      "values": {
+        "boolCols": {
+          "yes": "Áno",
+          "no": "Nie",
+          "all": "Všetko"
+        },
+        "isFavorite": {
+          "yes": "Áno️",
+          "no": "Nie"
+        },
+        "diagnosis": {
+          "hidden": "Skryté"
+        },
+        "note": {
+          "placeholder": "Vložte poznámku",
+          "editor": {
+            "save": "Uložiť",
+            "close": "Zavrieť"
+          }
+        }
+      },
+      "search": {
+        "placeholder": "Vyhľadávanie",
+        "noData": "Zadaným požiadavkám nevyhovujú žiadne záznamy."
+      }
+    }
+  },
+  "sampleImage": {
+    "zoom-level": "Úroveň zväčšenia",
+    "assistant": {
+      "title": "Pomocník",
+      "hideNames": "Skryť názvy",
+      "hideDescription": "Skryť popis",
+      "keyWords": "Kľúčové slová",
+      "notes": "Poznámky",
+      "area": "Oblasť",
+      "values": {
+        "note": {
+          "placeholder": "Vložte poznámku",
+          "editor": {
+            "save": "Uložiť",
+            "close": "Zavrieť"
+          }
+        }
+      }
+    }
+  },
+  "route": {
+    "home": "HIPA",
+    "organCatalog": "Orgán",
+    "systemCatalog": "Systém",
+    "sampleImage": "Snímky",
+    "all": "Všetky",
+    "classwork": "Výučba",
+    "pregradual": "Pregraduálné",
+    "postgradual": "Postgraduálné"
+  }
+}

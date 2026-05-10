@@ -1,0 +1,110 @@
+<div
+  [hidden]="!assistantVisible"
+  class="assistant-container"
+  *transloco="let t; read: 'sampleImage.assistant'"
+  [ngStyle]="this.sampleImageHelperService.getAssistantStyle()">
+  <div class="assistant-header">
+    <h3>{{ t('title') }}</h3>
+    <button type="button" (click)="toggleAssistantVisibility()">
+      <img
+        src="../assets/sample-image/assistant/close-button.svg"
+        alt="close button" />
+    </button>
+  </div>
+
+  <mat-divider *ngIf="sampleImage.caustryFile" />
+  <div *ngIf="sampleImage.caustryFile">
+    <a
+      [href]="getCaustryPath(sampleImage.caustryFile)"
+      download="{{ sampleImage.caustryFile.name }}"
+      target="_blank"
+      class="pdf-name-color">
+      <mat-icon>insert_drive_file_border</mat-icon>
+      {{ sampleImage.caustryFile.name }}
+    </a>
+  </div>
+  <mat-divider />
+  <div class="button-container">
+    <mat-button-toggle
+      [disableRipple]="true"
+      (click)="toggleShowAnnotationName()">
+      <mat-icon>
+        {{ annotationVisible ? 'visibility' : 'visibility_off' }}
+      </mat-icon>
+      {{ t('hideNames') }}
+    </mat-button-toggle>
+    <mat-button-toggle [disableRipple]="true" (click)="toggleShowDescription()">
+      <mat-icon>
+        {{ descriptionVisible ? 'visibility' : 'visibility_off' }}
+      </mat-icon>
+      {{ t('hideDescription') }}
+    </mat-button-toggle>
+  </div>
+
+  <mat-divider />
+
+  <mat-expansion-panel class="enxpand-small">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <img
+          class="icon"
+          src="../assets/sample-image/assistant/keyword-icon.svg"
+          alt="icon depicting keywords" />
+        <p>{{ t('keyWords') }}</p>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngIf="sampleImage.keyWords">
+      <div
+        class="big-tags-container"
+        *ngFor="let tagLine of getTags(sampleImage.keyWords); let i = index">
+        <div class="tags-container" *ngFor="let tag of tagLine; let j = index">
+          <span *ngIf="j < 3" class="tag">{{ tag }}</span>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+  <mat-divider />
+  <div class="notes-container">
+    <img
+      class="icon"
+      src="../assets/sample-image/assistant/notes-icon.svg"
+      alt="icon depicting notes" />
+    <!--        <p>{{ t('notes') }}</p>-->
+    <mat-form-field class="form-field" appearance="outline">
+      <input
+        matInput
+        class="input-design"
+        placeholder="{{ t('values.note.placeholder') }}"
+        [value]="filterHtmlTags(sampleImage.note || '')"
+        [disabled]="textEditorOpen"
+        (focus)="openEditor(sampleImage, $event.target)" />
+    </mat-form-field>
+  </div>
+
+  <ng-template #editorContainer></ng-template>
+
+  <mat-divider />
+
+  <div class="annotation-list-container">
+    <mat-accordion [multi]="true" #descriptionAccordion="matAccordion">
+      @for (annotation of annotations; track annotation.id) {
+        <div class="anot-container">
+          <mat-expansion-panel (click)="revertToggleDescription()">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <input
+                  class="anot-checkbox"
+                  type="checkbox"
+                  style="cursor: pointer"
+                  [checked]="annotation.visible"
+                  (click)="toggleAnnotation(annotation)" />
+                {{ annotation.displayedName }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ annotation.description }}</p>
+          </mat-expansion-panel>
+        </div>
+      }
+    </mat-accordion>
+  </div>
+</div>

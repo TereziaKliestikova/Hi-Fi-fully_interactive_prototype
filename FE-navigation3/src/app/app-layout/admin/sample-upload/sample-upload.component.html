@@ -1,0 +1,148 @@
+<div class="modal-overlay">
+  <div class="modal-content" (click)="$event.stopPropagation()" *appHasAccess="[RbacRoles.Admin]">
+    <div class="modal-header">
+      <h2 *transloco="let t; read: 'admin.sampleUpload'">{{ t('title') }}</h2>
+      <button class="close-button" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="modal-body" *transloco="let t; read: 'admin.sampleUpload'">
+      <form class="outer-form" (submit)="onSubmit()" [formGroup]="adminForm">
+        <!-- File upload section -->
+        <div class="file-upload-container">
+          <label class="form-label"
+                 for="SampleImage"
+                 [class.label-invalid]="
+            adminForm.get('SampleImage')?.invalid &&
+            adminForm.get('SampleImage')?.touched
+          ">
+            {{ t('form.sampleImage.label') }}
+            <mat-icon matTooltip="{{ t('form.sampleImage.label') }}">info</mat-icon>
+          </label>
+          <div class="file-upload-button"
+               tabindex="0"
+               (click)="fileInput.click()"
+               (keyup.enter)="fileInput.click()"
+               [class.button-invalid]="
+            adminForm.get('SampleImage')?.invalid &&
+            adminForm.get('SampleImage')?.touched
+          ">
+            <input type="file"
+                   hidden
+                   id="SampleImage"
+                   (change)="onSampleImageSelected($event)"
+                   formControlName="SampleImage"
+                   #fileInput />
+            <mat-icon>library_add</mat-icon>
+            <span>
+              {{
+            sampleImage?.name || t('form.sampleImage.placeholder')
+              }}
+            </span>
+          </div>
+          <!-- <mat-error
+            *ngIf="
+              adminForm.get('SampleImage')?.invalid &&
+              adminForm.get('SampleImage')?.touched
+            ">
+            {{ t('form.sampleImage.error') }}
+          </mat-error> -->
+
+          <label class="form-label"
+                 for="AnnotationFile"
+                 [class.label-invalid]="
+            adminForm.get('AnnotationFile')?.invalid &&
+            adminForm.get('AnnotationFile')?.touched
+          ">
+            {{ t('form.annotationFile.label') }}
+            <mat-icon matTooltip="{{ t('form.annotationFile.label') }}">
+              info
+            </mat-icon>
+          </label>
+          <div class="file-upload-button"
+               tabindex="0"
+               (click)="annotationInput.click()"
+               (keyup.enter)="annotationInput.click()"
+               [class.button-invalid]="
+            adminForm.get('AnnotationFile')?.invalid &&
+            adminForm.get('AnnotationFile')?.touched
+          ">
+            <input type="file"
+                   hidden
+                   id="AnnotationFile"
+                   (change)="onAnnotFileSelected($event)"
+                   formControlName="AnnotationFile"
+                   #annotationInput />
+            <mat-icon>library_add</mat-icon>
+            <span>
+              {{
+            annotationFile?.name || t('form.annotationFile.placeholder')
+              }}
+            </span>
+          </div>
+          <!-- <mat-error
+            *ngIf="
+              adminForm.get('AnnotationFile')?.invalid &&
+              adminForm.get('AnnotationFile')?.touched
+            ">
+            {{ t('form.annotationFile.error') }}
+          </mat-error> -->
+        </div>
+
+        <!-- <mat-form-field class="full-width styled-field" appearance="outline">
+          <mat-label>{{ t('form.sampleImageFileName.label') }}</mat-label>
+          <input
+            matInput
+            id="SampleImageFileName"
+            type="text"
+            formControlName="SampleImageFileName" />
+        </mat-form-field> -->
+
+        <mat-form-field class="full-width styled-field" appearance="outline">
+          <mat-label>{{ t('form.organ.label') }}</mat-label>
+          <mat-select id="OrganId"
+                      formControlName="OrganId"
+                      (selectionChange)="onOrganChange($event)">
+            <mat-option *ngFor="let organ of organs" [value]="organ.id">
+              {{ organ.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width styled-field" appearance="outline">
+          <mat-label>{{ t('form.keyWords.label') }}</mat-label>
+          <input #kw
+                 name="currentKeyWord"
+                 placeholder="..."
+                 (input)="currentKeyWord.next(kw.value)"
+                 [matChipInputFor]="chipGrid"
+                 [matAutocomplete]="auto"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 (matChipInputTokenEnd)="add($event)" />
+          <mat-autocomplete #auto="matAutocomplete"
+                            (optionSelected)="selected($event, kw)">
+            <mat-option *ngFor="let keyWord of filteredkeyWords"
+                        [value]="keyWord">
+              {{ keyWord }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-chip-grid #chipGrid
+                         [attr.aria-label]="t('form.annotationFile.placeholder')">
+            @for (keyWord of keyWords(); track $index) {
+            <mat-chip-row (removed)="remove(keyWord)">
+              {{ keyWord }}
+              <button matChipRemove [attr.aria-label]="'remove ' + keyWord">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+            }
+          </mat-chip-grid>
+        </mat-form-field>
+
+        <app-button type="submit"> {{ t('form.submit') }} </app-button>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,83 @@
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  onload="this.onload=null;this.rel='stylesheet'" />
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+</noscript>
+
+<div class="popover" *transloco="let t; read: 'admin.editTags'">
+  <div class="popup-header">
+    <button class="close-popup-btn" (click)="onClosePopup()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <ng-container *ngIf="tags.length > 0; else noTags">
+    <div class="tag-list">
+      <div class="tag-item-wrapper" *ngFor="let tag of tags; let i = index">
+        <div class="tag-item">
+          <ng-container *ngIf="editingIndex !== i; else editMode">
+            <span class="tag-label">{{ tag }}</span>
+          </ng-container>
+          <ng-template #editMode>
+            <input
+              class="tag-label"
+              [(ngModel)]="editedTag"
+              (keydown.enter)="saveEdit()"
+              style="
+                flex: 1;
+                border: none;
+                outline: none;
+                background: transparent;
+              " />
+          </ng-template>
+        </div>
+        <div class="tag-actions">
+          <button
+            class="tag-icon"
+            *ngIf="editingIndex !== i"
+            (click)="startEdit(i)">
+            <mat-icon class="edit-icon">edit</mat-icon>
+          </button>
+          <button
+            class="tag-icon"
+            *ngIf="editingIndex === i"
+            (click)="saveEdit()">
+            <mat-icon class="edit-icon">save</mat-icon>
+          </button>
+          <button
+            class="tag-icon"
+            (click)="editingIndex === i ? cancelEdit() : deleteTag(i)">
+            <mat-icon class="delete-icon" *ngIf="editingIndex !== i"
+              >close</mat-icon
+            >
+            <mat-icon class="delete-icon" *ngIf="editingIndex === i"
+              >cancel</mat-icon
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noTags>
+    <div class="no-tags-message">
+      {{ t('tagsNotFound') }}
+    </div>
+  </ng-template>
+
+  <div class="tag-input-container">
+    <input
+      class="tag-input"
+      placeholder=" {{ t('addTag') }}"
+      #tagInput
+      (keydown.enter)="addTag(tagInput)" />
+    <button class="tag-icon add-btn" (click)="addTag(tagInput)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,227 @@
+.assistant-container[hidden] {
+  display: none !important;
+}
+
+.assistant-container {
+  position: absolute;
+  padding: 14px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #0891b2;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+
+  .assistant-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    flex-shrink: 0;
+
+    h3 {
+      color: #155e75;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+
+    .mat-button-toggle {
+      border: none;
+      color: #0891b2;
+    }
+
+    .mat-button-toggle-checked {
+      background-color: transparent;
+    }
+
+    ::ng-deep .mat-button-toggle-label-content {
+      line-height: 16px;
+      padding: 4px 2px;
+      font-size: 14px;
+    }
+  }
+
+  mat-divider {
+    margin: 2px 0 !important;
+  }
+
+  mat-expansion-panel {
+    box-shadow: none;
+
+    mat-expansion-panel-header {
+      mat-panel-title {
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+    // found this on StackOverflow
+    // let me know if there's a better way to do this
+    ::ng-deep .mat-expansion-panel-body {
+      padding: 0;
+    }
+
+    .notes-textarea {
+      border: solid 1px #0891b2;
+      border-radius: 5px;
+      height: 58px;
+      width: 200px;
+      resize: vertical;
+    }
+
+    .notes-textarea:focus {
+      outline: 2px solid #0891b2;
+    }
+
+    mat-expansion-panel-header {
+      padding: 0 5px;
+    }
+
+    mat-panel-title {
+      font-size: 16px;
+      font-weight: 500;
+
+      .icon {
+        background-color: #a5f3fc;
+        border-radius: 8px;
+        padding: 5px;
+        margin-right: 10px;
+      }
+
+      .anot-checkbox {
+        margin-right: 10px;
+        accent-color: #0891b2;
+      }
+    }
+  }
+
+  .pdf-name-color {
+    display: inline-flex;
+    align-items: center;    /* vertically centers icon & text */
+    color: #212725;
+    text-decoration: none;  /* if you want to remove underline */
+  }
+
+  .big-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background-color: #e0f7fa;
+    padding: 4px 3px;
+    margin-right: 4px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    margin-bottom: 10px;
+  }
+
+  .notes-container {
+    padding: 7px 5px 3px 5px;
+
+    .icon {
+      background-color: #a5f3fc;
+      border-radius: 8px;
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    //Textbox alignment
+    .mat-mdc-form-field {
+      font-size: 14px;
+      flex-direction: row;
+      vertical-align: top;
+    }
+
+    //Textbox sizing
+    ::ng-deep
+      .form-field
+      .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+      .mat-mdc-form-field-infix {
+      padding-top: 5px !important;
+      padding-bottom: 5px !important;
+    }
+
+    ::ng-deep .form-field .mat-mdc-form-field-infix {
+      min-height: 30px !important;
+      width: 173px !important;
+    }
+  }
+
+  ::ng-deep .editor-comp {
+    display: flex;
+    flex-direction: column;
+
+    position: fixed;
+
+    width: 33%;
+    height: 33%;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99999;
+
+    background-color: white;
+    border-radius: 9px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  ::ng-deep #editor-container {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .annotation-list-container {
+    flex: 1;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 7px; /* half the typical width */
+    }
+  }
+
+  .anot-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 2px;
+
+    .mat-expansion-panel-header {
+      max-height: 50px !important;
+    }
+
+    ::ng-deep .mat-expansion-panel-body {
+      padding: 0 33px;
+
+      p {
+        margin: 0 !important;
+        color: rgba(82, 82, 91, 1);
+      }
+    }
+    .mat-expansion-panel-spacing {
+      margin: 5px 0 !important;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+####################################
+FROM node:20.8.1 AS dependencies
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+####################################
+FROM node:20.8.1
+
+WORKDIR /app
+
+COPY --from=dependencies /app /app
+
+COPY ./src /app/src
+COPY angular.json /app
+COPY tsconfig.json /app
+COPY tsconfig.app.json /app
+COPY tsconfig.spec.json /app
+
+RUN npm install -g @angular/cli
+
+EXPOSE 80
+CMD ["ng", "serve", "--configuration", "docker", "--poll", "4000", "--host", "0.0.0.0", "--port", "80"]

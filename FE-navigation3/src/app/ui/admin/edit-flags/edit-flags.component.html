@@ -1,0 +1,68 @@
+<div class="modal-overlay" *transloco="let t; read: 'admin.flagsComponent'">
+  <app-delete-confirm
+    *ngIf="deleteConfirmationModalShow"
+    [flag]="selectedFlag"
+    (closeComponent)="deleteConfirmationModalShow = false"
+    (delete)="deleteTagConfirm($event)">
+  </app-delete-confirm>
+
+  <div
+    class="modal"
+    (click)="$event.stopPropagation()"
+    tabindex="1"
+    (keydown.enter)="$event.stopPropagation()">
+    <button class="close-btn" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <h2>{{ t('title') }}</h2>
+
+    <div class="tags-container">
+      <div *ngFor="let tag of flags" class="tag">
+        <span
+          class="color-box"
+          [ngStyle]="{ 'background-color': tag.color }"></span>
+
+        <input
+          *ngIf="activeFlagId === tag.id"
+          [(ngModel)]="tag.name"
+          class="edit-input"
+          (keydown.enter)="saveTag(tag)"
+          (blur)="saveTag(tag)" />
+
+        <span
+          *ngIf="activeFlagId !== tag.id"
+          class="tag-name"
+          (click)="editTag(tag, tag.id)"
+          (keydown.enter)="editTag(tag, tag.id)"
+          tabindex="2">
+          {{ tag.name }}
+        </span>
+
+        <div class="tag-buttons">
+          <button
+            mat-icon-button
+            class="icon-btn"
+            (click)="editTag(tag, tag.id)">
+            <mat-icon class="edit-icon">edit</mat-icon>
+          </button>
+          <button mat-icon-button class="icon-btn" (click)="deleteTag(tag)">
+            <mat-icon class="delete-icon">close</mat-icon>
+          </button>
+        </div>
+
+        <div class="color-picker-container" *ngIf="activeFlagId === tag.id">
+          <p>{{ t('chooseColor') }}</p>
+          <div class="colors">
+            <div
+              *ngFor="let color of colors"
+              class="color-box-color-picker"
+              [ngStyle]="setColor(color)"
+              [class.selected]="color === selectedColor"
+              (mousedown)="selectColor(color, $event)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
