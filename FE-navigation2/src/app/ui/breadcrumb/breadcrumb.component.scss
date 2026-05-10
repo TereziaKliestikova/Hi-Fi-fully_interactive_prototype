@@ -1,0 +1,44 @@
+@import 'src/styles';
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: inline;
+
+    &:before {
+      content: '/';
+      color: #a1a1aa;
+      margin: 0 12px;
+    }
+
+    &:first-child:before {
+      content: '';
+      margin: 0;
+    }
+
+    &:last-child a {
+      color: $primary;
+      cursor: default;
+    }
+
+    &:hover a {
+      color: $primary;
+    }
+
+    a {
+      color: unset;
+      text-decoration: none;
+      font-size: 16px;
+
+      mat-icon {
+        font-size: 16px;
+        height: 17px;
+        width: 17px;
+        vertical-align: bottom;
+      }
+    }
+  }
+}

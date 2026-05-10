@@ -1,0 +1,104 @@
+.breadcrumb {
+  position: absolute;
+  z-index: 999;
+  background-color: rgba(234, 223, 223, 0.4);
+  left: 0;
+  padding: 5px 10px 5px 25px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  margin-top: 5px;
+}
+
+::ng-deep .content {
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-top: -10px !important;
+}
+.navigator-container {
+  position: absolute;
+  top: 80px;
+  right: 13px;
+  height: 165px;
+  width: 259px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid #0891b2;
+  z-index: 100;
+  background-color: white;
+  #navigatorDiv {
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    border: 1px solid #0891b2;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+}
+
+.osd-container {
+  width: 100%;
+  height: 100%;
+}
+
+.button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+  z-index: 100;
+  background: #0891b2;
+  border-radius: 8px 0 0 8px;
+  display: flex;
+  padding: 7px;
+}
+
+.control-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  margin: 0 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.button-container:hover {
+  background: #155e75;
+}
+
+.zoom-container {
+  position: fixed;
+  left: 0;
+  bottom: 20px;
+  z-index: 100;
+  font-size: 18px;
+  padding: 19px 20px;
+  // background-color: #00000020;
+  // background: #0891b2;
+  color: white;
+  border-radius: 0 8px 8px 0;
+}
+
+.zoom-container p {
+  margin: 0;
+  text-align: center;
+}
+
+#zoom-reference {
+  // width: 615px;
+  background-color: black;
+  height: 3px;
+  opacity: 0.5;
+}
+.zoom-text {
+  color: #6e696b;
+  font-size: 0.7rem;
+}

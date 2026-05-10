@@ -1,0 +1,180 @@
+@import 'src/styles';
+
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(192, 214, 221, 0.7);
+  z-index: 1000;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  background: white;
+  width: 450px;
+  max-width: 90vw;
+  max-height: 90vh;
+  border: 2px solid $primary; 
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+
+  h2 {
+    color: $accent;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: $accent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+form.outer-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 12px;
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .styled-field {
+    mat-form-field-wrapper {
+      padding: 4px 6px;
+    }
+
+    .mat-form-field-outline {
+      border-color: $primary;
+    }
+
+    .mat-form-field-outline-thick {
+      border-color: $primarydark;
+    }
+
+    .mat-form-field-label {
+      color: $accent;
+      font-weight: 200;
+    }
+
+    input,
+    mat-select {
+      color: $accent;
+    }
+  }
+}
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  .form-label {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 250;
+    color: $accent;
+    gap: 6px;
+
+    mat-icon {
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+
+  .file-upload-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    height: 40px;
+    border: 2px solid $primary;
+    border-radius: 6px;
+    background-color: #e0f7fa;
+    color: $primary;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: darken(#e0f7fa, 5%);
+    }
+
+    &.button-invalid {
+      border-color: red;
+    }
+  }
+
+  .label-invalid {
+    color: red;
+  }
+}
+
+.modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: flex-end;
+
+  app-button {
+    width: 100%;
+  }
+}
+
+mat-error {
+  font-size: 10px;
+  color: red;
+  margin-top: 4px;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}

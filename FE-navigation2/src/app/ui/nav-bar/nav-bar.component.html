@@ -1,0 +1,14 @@
+<nav>
+  <ng-container *ngFor="let anchor of navConfig">
+    <app-anchor
+      *appHasAccess="anchor.roles"
+      noUnderline
+      [to]="anchor.to"
+      [routerLink]="anchor.to"
+      [routerLinkActive]="['is-active']">
+      <div class="container">
+        <span>{{ anchor.text | async }}</span>
+      </div>
+    </app-anchor>
+  </ng-container>
+</nav>

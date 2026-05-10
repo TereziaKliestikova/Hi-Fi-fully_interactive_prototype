@@ -1,0 +1,33 @@
+@if (!itemsData) {
+  <div class="catalog-spinner">
+    <app-spinner />
+  </div>
+} @else if (itemsData.length === 0) {
+  <div *transloco="let t; read: 'dashboard.catalog'" class="catalog-empty-list">
+    {{ t('catalog-no-items') }}
+  </div>
+} @else {
+  <mat-grid-list
+    [cols]="cols"
+    rowHeight="1:1"
+    class="organ-grid"
+    gutterSize="3em">
+    @for (item of itemsData; track item.id) {
+      <app-anchor noUnderline [to]="navigate(item)">
+        @if (showAsTiles) {
+          <mat-grid-tile class="grid-tile">
+            <div class="img-container">
+              <app-icon [iconId]="item.id" [endpoint]="staticIconEndpoint" />
+              <div class="grid-tile-label">{{ item.name }}</div>
+            </div>
+          </mat-grid-tile>
+        } @else {
+          <div class="grid-list">
+            {{ item.name }}
+          </div>
+          <mat-divider />
+        }
+      </app-anchor>
+    }
+  </mat-grid-list>
+}

@@ -1,0 +1,627 @@
+@use '@angular/material' as mat;
+@import 'src/styles';
+.header-container {
+  margin: 20px 15px;
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.button-container {
+  gap: 25px;
+  display: flex;
+}
+
+.flags-component {
+  max-width: 400px;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.caustry-cell-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-right: 32px;
+}
+
+.three-dots-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+::ng-deep .three-dots-button.mat-mdc-icon-button {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+::ng-deep .three-dots-button.mat-mdc-icon-button:hover,
+::ng-deep .three-dots-button.mat-mdc-icon-button:focus,
+::ng-deep .three-dots-button.mat-mdc-icon-button:active {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+::ng-deep .three-dots-button .mat-mdc-button-persistent-ripple,
+::ng-deep .three-dots-button .mat-mdc-ripple,
+::ng-deep .three-dots-button::before,
+::ng-deep .three-dots-button::after {
+  display: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-mdc-menu-panel {
+  border-radius: 0 0 9px 9px !important;
+  margin-top: 4px;
+  box-shadow: 0px 4px 20px -1px rgba(0, 0, 0, 0.1);
+  padding: 0 !important;
+  min-width: unset !important;
+  max-width: unset !important;
+  width: auto !important;
+  overflow: visible;
+  height: auto !important;
+}
+
+::ng-deep .mat-mdc-menu-item {
+  padding: 6px 12px !important;
+  min-height: 32px !important;
+  height: 32px !important;
+  line-height: 18px !important;
+  display: flex;
+  align-items: center;
+  color: #007f99 !important;
+  --mat-menu-item-label-text-size: 14px !important;
+  .mat-icon {
+    font-size: 24px !important;
+    color: #007f99 !important;
+    margin-right: 4px !important;
+    padding: 0 !important;
+  }
+}
+
+::ng-deep .mat-mdc-menu-item:hover,
+::ng-deep .mat-mdc-menu-item:focus,
+::ng-deep .mat-mdc-menu-item:active,
+::ng-deep .mat-mdc-menu-item.cdk-focused,
+::ng-deep .mat-mdc-menu-item.cdk-program-focused {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.floating-tag-editor {
+  position: absolute;
+  z-index: 120000;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #00acc1;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.floating-action-btn {
+  position: absolute;
+  z-index: 120000;
+  background: white;
+  color: #044b58; // кастомный тёмно-бирюзовый
+  border: none;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding: 6px 14px;
+  font-weight: 400;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+
+.editor-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent; // Или rgba(0, 0, 0, 0.2) если хочешь затемнение
+  z-index: 998;
+}
+
+:host ::ng-deep .mat-header-row .mat-column-isFavorite,
+:host ::ng-deep .mat-row    .mat-column-isFavorite {
+  /* force a fixed 20px width */
+  flex:       0 0 20px !important;
+  max-width:  20px !important;
+  min-width:  20px !important;
+  padding:    4px 8px !important;
+}
+
+
+
+.samples-table {
+  width: 100%;
+  max-height: 350px;
+  flex: 1;
+  overflow: auto;
+  position: relative;
+
+  .mat-table {
+    table-layout: fixed; /* Колонки имеют фиксированную ширину */
+    width: 100%; /* Таблица занимает всю ширину контейнера */
+  }
+  .icon-group .mat-icon {
+    //ont-size: 24px; /* Увеличенные иконки */
+    color: #0891b2;
+  }
+  .icon-group {
+    display: flex; /* Устанавливаем flex-контейнер */
+    // gap: 1%; /* Добавляем расстояние между элементами */
+  }
+
+  .header-button-style button {
+    text-align: right;
+    margin-left: -10px;
+    color: white;
+  }
+
+  .header-button-style .mat-icon {
+    color: white;
+  }
+
+  .row-button-style button {
+    // width: 32px; /* Уменьшенная ширина */
+    // height: 32px; /* Уменьшенная высота */
+    align-items: center; /* Выравниваем элементы по вертикали */
+    text-align: center;
+  }
+  .icon-group-second-header {
+    display: flex; /* Устанавливаем flex-контейнер */
+    align-items: center; /* Выравниваем элементы по вертикали */
+    gap: 12%;
+    color: #0891b2;
+    font-size: 11px; /* Увеличенные иконки */
+  }
+
+
+  .icon-group-row {
+    display: flex; /* Устанавливаем flex-контейнер */
+    align-items: center; /* Выравниваем элементы по вертикали */
+    gap: 6%;
+    text-align: center;
+    color: #0891b2;
+    font-size: 11px; /* Увеличенные иконки */
+  }
+
+  // Центрирование заголовков и ячеек
+  .mat-header-cell,
+  .mat-cell {
+    width: calc(100% / 9); /* Все колонки занимают равное пространство */
+    text-align: center;
+    display: flex;
+    align-items: center; // Вертикальное центрирование
+    justify-content: center; // Горизонтальное центрирование
+    text-align: center;
+    vertical-align: middle;
+    padding: 6px;
+    font-size: 12px !important;
+  }
+  .spinner-cell {
+    padding: 20px 0;
+  }
+  .mat-sort-header {
+    color: $primary;
+  }
+
+  .boolean-chip {
+    border-radius: 8px;
+    padding: var(--gap-xs, 4px) var(--gap-md, 12px);
+    text-align: center;
+    &.true {
+      color: #065f46;
+      background-color: #d1fae5;
+    }
+    &.false {
+      color: #92400e;
+      background-color: #fef3c7;
+    }
+  }
+
+  .big-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+    top: 10px;
+  }
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 9px;
+  }
+
+  .firstLineTag {
+    background-color: #e0f7fa;
+    padding: 4px 7px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .tag {
+    background-color: #e0f7fa;
+    padding: 4px 7px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    margin-bottom: 10px;
+  }
+
+  .dots-icon {
+    font-size: 16px;
+    padding-top: 10px;
+    color: #007b8f;
+    vertical-align: middle;
+  }
+
+  ::ng-deep .form-field {
+    --mdc-outlined-text-field-container-shape: 8px !important; /* Радиус скругления */
+    width: 130px; /* Ширина поля */
+    height: 26px !important; /* Уменьшение высоты поля */
+    font-size: 13px !important;
+
+    ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+      display: none; /* Скрытие области под полем */
+    }
+
+    ::ng-deep mat-mdc-text-field-wrapper {
+      padding: 0 2px; /* Уменьшение внутренних отступов */
+    }
+  }
+
+  .input-design {
+    font-size: 14px !important;
+
+  }
+
+  .search-input,
+  .search-input::placeholder {
+    color: #0891b2 !important; /* Установка цвета текста */
+    font-size: 11px !important;
+  }
+
+  ::ng-deep .search-input .mat-mdc-select-value {
+    font-size: 11px !important;
+  }
+
+  .limited-input {
+    max-width: 72%;
+  }
+  ::ng-deep .search-input .mat-mdc-option {
+    font-size: 11px !important;
+  }
+
+  .filter-form-field {
+    ::ng-deep .mat-mdc-form-field-infix {
+      font-size: 11px !important;
+      padding: 2px 6px; /* Компактные отступы */
+      min-height: 32px; /* Минимальная высота ячейки */
+      max-height: 32px !important; /* Фиксация высоты ячейки */
+    }
+    .note-form-field {
+      ::ng-deep .mat-mdc-form-field-infix {
+        padding: 2px 6px; /* Компактные отступы */
+        min-height: 32px; /* Минимальная высота ячейки */
+        max-height: 32px !important; /* Фиксация высоты ячейки */
+      }
+    }
+
+    // Цвета для поля
+    --mdc-outlined-text-field-outline-color: #0891b2 !important;
+    --mdc-outlined-text-field-hover-outline-color: #0891b2 !important;
+
+    // Цвет стрелки выпадающего списка
+    --mat-select-enabled-arrow-color: #0891b2 !important;
+    --mat-select-disabled-arrow-color: #cccccc !important; /* Серый для отключённых полей */
+  }
+  ////Notes search field
+  //.notes-filter-field{
+  //  width: 100%;
+  //  max-width: 100%;
+  //}
+  .id-filter-field {
+    max-width: 100px;
+  }
+  .mat-column-id {
+    max-width: 100px;
+  }
+
+  .select-form-field {
+    max-width: 70px;
+    font-size: 14px;
+  }
+  .mat-column-hasAnnotation {
+    width: 110px;
+  }
+}
+
+// Стили для иконок
+#downloadPdf,
+#downloadMaterialPdf {
+  color: hsl(0, 3%, 87%);
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.custom-star {
+  color: #6ba8c8;
+  font-size: 28px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.pdfNameFontCollor {
+  color: #202221;
+  align-items: center;
+}
+.pdfNameFontCollor .outlined-icon {
+  padding: 0;            // remove any top padding
+  vertical-align: middle;
+}
+
+
+.search-icon {
+  color: $primary;
+  font-size: 18px;
+  padding: 1.75px 0 1px 2px !important;
+  vertical-align: middle;
+}
+
+.outlined-icon {
+  font-size: 26px; /* Размер иконки */
+  color: transparent; /* Сделать основную часть прозрачной */
+  -webkit-text-stroke: 1px gray; /* Добавить границу */
+}
+
+.samples-table th {
+  font-size: 13px; /* Размер шрифта для заголовков */
+}
+
+.samples-table td {
+  font-size: 11px; /* Размер шрифта для ячеек */
+}
+
+.notification-container {
+  position: fixed;
+  bottom: 40px;
+  left: 20px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media screen and (max-width: 1850px) {
+  .samples-table {
+    width: 100%;
+    flex: 1;
+    overflow: auto;
+
+    .mat-table {
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    .mat-header-cell,
+    .mat-cell {
+      display: flex;
+      align-items: start; // Вертикальное центрирование
+      justify-content: start; // Горизонтальное центрирование
+      text-align: center;
+      vertical-align: middle;
+      //padding: 5px;
+    }
+    .spinner-cell {
+      padding: 20px 0;
+    }
+
+    .big-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      top: 10px;
+    }
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 9px;
+    }
+
+    .firstLineTag {
+      background-color: #e0f7fa;
+      padding: 4px 7px;
+      border-radius: 8px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .tag {
+      background-color: #e0f7fa;
+      padding: 4px 7px;
+      border-radius: 8px;
+      font-size: 14px;
+      white-space: nowrap;
+      margin-bottom: 10px;
+    }
+
+    .dots-icon {
+      font-size: 16px;
+      padding-top: 10px;
+      color: #007b8f;
+      vertical-align: middle;
+    }
+    ::ng-deep .form-field {
+      --mdc-outlined-text-field-container-shape: 8px !important; /* Радиус скругления */
+      width: 130px;
+      max-width: 130px;
+
+      ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+      }
+
+      ::ng-deep mat-mdc-text-field-wrapper {
+        padding: 0 2px;
+      }
+    }
+
+    .input-design {
+      font-size: 14px !important;
+    }
+
+
+
+    .filter-form-field {
+      ::ng-deep .mdc-text-field--outlined {
+        padding: 0;
+      }
+
+      ::ng-deep .mat-mdc-form-field-infix {
+        min-height: 32px; /* Минимальная высота ячейки */
+        max-height: 32px !important; /* Фиксация высоты ячейки */
+      }
+    }
+
+    //Notes search field
+    //.notes-filter-field{
+    //  width: 100%;
+    //  max-width: 100%;
+    //}
+
+    .note-form-field {
+      //width: 100%;
+      ::ng-deep .mdc-text-field--outlined {
+        padding: 0 0 0 5px;
+      }
+      ::ng-deep .mat-mdc-form-field-infix {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        padding: 2px 4px; /* Компактные отступы */
+        min-height: 32px; /* Минимальная высота ячейки */
+        max-height: 32px !important; /* Фиксация высоты ячейки */
+      }
+    }
+  }
+
+  //.note-form-field {
+  //  max-width: 100%;
+  //  width: 100%;
+  //}
+
+  .mat-column-isFavorite,
+  .mat-column-hasAnnotation {
+    width: 100px;
+  }
+
+  .custom-star {
+    color: #6ba8c8;
+    font-size: 28px;
+    margin: 0;
+  }
+
+  .pdfNameFontCollor {
+    color: #212725;
+  }
+
+  .search-icon {
+    color: #57a9bd;
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    padding-right: 1px;
+  }
+
+  .outlined-icon {
+    font-size: 26px; /* Размер иконки */
+    color: transparent; /* Сделать основную часть прозрачной */
+    -webkit-text-stroke: 1px gray; /* Добавить границу */
+  }
+
+  .samples-table th {
+    font-size: 14px; /* Размер шрифта для заголовков */
+  }
+
+  .samples-table td {
+    font-size: 14px; /* Размер шрифта для ячеек */
+  }
+}
+
+@media screen and (min-width: 2050px) {
+  .samples-table {
+    ::ng-deep .form-field {
+      font-size: 13px !important;
+      width: 150px;
+      max-width: 150px;
+    }
+
+    .input-design {
+      font-size: 16px !important;
+    }
+
+    .filter-form-field {
+      font-size: 13px !important;
+      width: 170px;
+      max-width: 170px;
+      ::ng-deep .mdc-text-field--outlined {
+        padding: 0;
+      }
+
+      ::ng-deep .mat-mdc-form-field-infix {
+        max-height: 35px !important;
+      }
+    }
+
+    .note-form-field {
+      ::ng-deep .mat-mdc-form-field-infix {
+        max-height: 35px !important;
+      }
+    }
+  }
+  .samples-table td {
+    font-size: 16px !important;
+  }
+}
+
+.mat-mdc-select-value {
+  font-size: 11px !important;
+  color: #0891b2 !important;
+}
+
+.mat-mdc-option {
+  font-size: 11px !important;
+  color: #293133 !important;
+}
+
+.organDropdownWrapper {
+  position: absolute;
+  width: 130px;
+  height: 32px;
+  background-color: white;
+  z-index: 999;
+}
+
+button[mat-icon-button]:disabled mat-icon {
+  color: #0891b2;
+}

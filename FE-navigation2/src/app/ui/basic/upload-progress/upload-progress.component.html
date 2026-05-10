@@ -1,0 +1,85 @@
+<div
+  *ngIf="tasks.length > 0"
+  [@slideDown]="isOpen ? 'open' : 'closed'"
+  class="upload-container">
+  <div class="upload-header-container">
+    <div
+      class="upload-header-icons"
+      *transloco="let t; read: 'admin.sampleUpload.uploadProgress'">
+      <h3>{{ t('upload') }}</h3>
+      <mat-progress-spinner
+        *ngIf="getTasksProgress() < 100"
+        [@fadeInOut]="isExpanded ? 'hide' : 'visible'"
+        [value]="getTasksProgress()"
+        mode="determinate">
+      </mat-progress-spinner>
+      <mat-icon
+        *ngIf="getTasksProgress() === 100"
+        [@fadeInOut]="isExpanded ? 'hide' : 'visible'"
+        color="primary"
+        >check_circle</mat-icon
+      >
+    </div>
+    <div class="upload-header-icons">
+      <mat-icon
+        *ngIf="isExpanded"
+        (click)="toggleList()"
+        (keydown.enter)="toggleList()"
+        tabindex="0"
+        class="toggle-icon"
+        >keyboard_arrow_down</mat-icon
+      >
+      <mat-icon
+        *ngIf="!isExpanded"
+        (click)="toggleList()"
+        (keydown.enter)="toggleList()"
+        tabindex="0"
+        class="toggle-icon"
+        >keyboard_arrow_up</mat-icon
+      >
+      <mat-icon
+        (click)="closeList()"
+        (keydown.enter)="closeList()"
+        tabindex="0"
+        class="toggle-icon"
+        >close</mat-icon
+      >
+    </div>
+  </div>
+  <div
+    [@slideDown]="isExpanded ? 'open' : 'closed'"
+    class="upload-list"
+    *transloco="let t; read: 'admin.sampleUpload.uploadProgress'">
+    <div *ngFor="let task of tasks" class="upload-item">
+      <span class="file-name" [title]="task.file.name">{{
+        task.file.name
+      }}</span>
+      <div class="upload-header-icons">
+        <span
+          class="cancel"
+          (click)="cancelUpload(task)"
+          (keydown.enter)="cancelUpload(task)"
+          tabindex="0"
+          *ngIf="task.progress < 100 && task.status === 'uploading'"
+          >{{ t('cancel') }}
+        </span>
+
+        <mat-progress-spinner
+          *ngIf="task.progress < 100 && task.status === 'uploading'"
+          [value]="task.progress"
+          mode="determinate">
+        </mat-progress-spinner>
+        <mat-icon
+          *ngIf="task.progress === 100 && task.status === 'completed'"
+          color="primary"
+          >check_circle</mat-icon
+        >
+        <mat-icon
+          *ngIf="task.status === 'canceled' || task.status === 'failed'"
+          color="primary"
+          >cancel</mat-icon
+        >
+      </div>
+    </div>
+  </div>
+</div>

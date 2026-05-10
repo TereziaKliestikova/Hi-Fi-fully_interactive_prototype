@@ -1,0 +1,25 @@
+<div [formGroup]="formGroup" *transloco="let t" class="input-element">
+  <span class="input-label">{{ input.label | async }}</span>
+  <mat-form-field appearance="outline">
+    <input
+      [type]="getType()"
+      matInput
+      [autocomplete]="input.autocomplete"
+      [formControl]="input.formControl"
+      [formControlName]="input.id"
+      placeholder="{{ input.placeholder | async }}" />
+    <!--    Placeholder has to be fed with curly braces
+    because it only supports string -->
+    <button
+      *ngIf="input.type === 'password'"
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide">
+      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error *ngIf="errorMsg()" [innerHTML]="errorMsg()"></mat-error>
+  </mat-form-field>
+</div>

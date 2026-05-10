@@ -1,0 +1,23 @@
+<div class="container" *transloco="let t; read: 'auth.registration'">
+  <div class="registration">
+    <img class="logo" src="/assets/logo-HIPA-3.svg" alt="Logo HIPA" />
+    <h1>{{ t('title') }}</h1>
+    <div *ngIf="!registrationSuccess">
+      <div class="info">
+        <app-text-with-link
+          [text]="t('alreadyRegistered.text')"
+          [link]="{ to: '/auth/login', text: t('alreadyRegistered.link') }" />
+      </div>
+      <app-form *ngIf="formCfg" [doSubmit]="doRegister" [config]="formCfg" />
+    </div>
+    <div class="registration-confirmation" *ngIf="registrationSuccess">
+      <h2>{{ t('form.success.title') }}</h2>
+      <p>{{ t('form.success.instructions.textFirst') }}</p>
+      <p>{{ t('form.success.instructions.textSecond') }}</p>
+      <p>{{ t('form.success.instructions.textThird') }}</p>
+      <a routerLink="/auth/login">
+        {{ t('form.success.instructions.link') }}
+      </a>
+    </div>
+  </div>
+</div>

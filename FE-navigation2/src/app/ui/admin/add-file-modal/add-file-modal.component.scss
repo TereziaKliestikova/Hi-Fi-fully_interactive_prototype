@@ -1,0 +1,115 @@
+.dialog-container {
+  width: 481px;
+  padding: 24px;
+  background: white;
+  border-radius: 9px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Вся колонка контента: заголовок, текст, кнопки */
+
+.content-wrapper {
+  width: 473px; // строго фиксированная ширина
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dialog-title-text {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  color: #155e75;
+  margin: 0;
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  mat-icon {
+    font-size: 20px;
+    color: #155e75;
+  }
+  &:focus,
+  &:active {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.dialog-content p {
+  margin: 0;
+}
+
+.dialog-content p strong {
+  font-weight: 700;
+  color: #155e75;
+}
+
+.info-text {
+  font-size: 13px;
+}
+
+.invalid {
+  color: red;
+}
+
+.file-upload-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  height: 52px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e0f7fa;
+  color: #0891b2;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+}
+
+.dialog-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+.submit-btn {
+  width: 425px;
+  height: 52px;
+  cursor: pointer;
+  background-color: #0891b2;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: none;
+  box-shadow: 0px 1px 2px rgba(30, 41, 59, 0.12);
+}

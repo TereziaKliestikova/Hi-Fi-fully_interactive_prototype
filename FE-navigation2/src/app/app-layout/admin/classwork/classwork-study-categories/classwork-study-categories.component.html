@@ -1,0 +1,38 @@
+<div style="margin: 1em">
+  <app-breadcrumb></app-breadcrumb>
+</div>
+<div class="container" *transloco="let t; read: 'learning.studyTypes'">
+  <mat-grid-list cols="2" gutterSize="30px" rowHeight="530px" class="grid-list">
+    <app-anchor noUnderline to="pregradual" class="tile-anchor">
+      <mat-grid-tile class="tile-container" style="margin-left: auto">
+        <div class="tile content-area">
+          <h3 class="tile-heading">{{ t('pregradual') }}</h3>
+          <div class="image-container">
+            <img
+              src="assets/admin/pregradual-icon.svg"
+              alt="Pregradual study"
+              role="img"
+              class="image-pre"
+              height="215"
+              width="214" />
+          </div>
+        </div>
+      </mat-grid-tile>
+    </app-anchor>
+
+    <app-anchor noUnderline to="postgradual" class="tile-anchor">
+      <mat-grid-tile class="tile-container" style="margin-right: auto">
+        <div class="tile content-area">
+          <h3 class="tile-heading">{{ t('postgradual') }}</h3>
+          <div class="image-container">
+            <img
+              src="assets/admin/postgradual-icon.svg"
+              alt="Postgradual study"
+              role="img"
+              class="image-post" />
+          </div>
+        </div>
+      </mat-grid-tile>
+    </app-anchor>
+  </mat-grid-list>
+</div>

@@ -1,0 +1,24 @@
+<div class="desc-content">
+  <div class="detail">
+    <div class="organ-details">
+      <div class="organ-card">
+        <app-icon
+          class="detail-icon"
+          [iconId]="description.id"
+          [endpoint]="staticIconEndpoint"></app-icon>
+      </div>
+      <div class="desc-and-pdfs">
+        <span class="name">{{ description.name }}</span>
+        <div class="description">{{ description.description }}</div>
+        <div *ngIf="pdf" class="pdfFiles">
+          <span class="pdfFile">
+            <a [href]="pdf.path" target="_blank" class="pdfName">
+              <mat-icon id="pdfLogo">description_outlined</mat-icon>
+              {{ pdf.name }}
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

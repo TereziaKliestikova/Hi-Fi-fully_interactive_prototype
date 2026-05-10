@@ -1,0 +1,91 @@
+<link rel="stylesheet" href="header.component.scss" />
+<header *transloco="let t; read: 'dashboard.header'" class="app-header">
+  <div class="left-side">
+    <a
+      [routerLink]="AppRoutes.app.home"
+      (click)="toggleMobileDropdown(false)"
+      class="logo">
+      <img src="assets/logo-HIPA-3.svg" alt="Logo HIPA" />
+    </a>
+    <app-nav-bar class="nav-bar" [navConfig]="userNav" />
+  </div>
+  <div class="right-side">
+    <button *ngIf="currentLanguage === 'sk'" (click)="changeLanguage('en')">
+      <img
+        class="icon"
+        src="assets/header/gb.svg"
+        alt="british english language icon"
+        style="width: 25px; height: 16px" />
+    </button>
+    <button *ngIf="currentLanguage === 'en'" (click)="changeLanguage('sk')">
+      <img
+        class="icon"
+        src="assets/header/sk.svg"
+        alt="slovak language icon"
+        style="width: 25px; height: 16px" />
+    </button>
+    <button class="profile" (click)="toggleDropdown()">
+      <!-- TODO change this icon once we either have default profile icon or use profile images -->
+      <img
+        src="assets/header/avatar.svg"
+        alt="user profile icon"
+        class="profile-avatar" />
+    </button>
+    <div class="dropdown-menu" *ngIf="isDropdownOpen">
+      <button (click)="logout()">
+        <img
+          class="icon logout-icon"
+          src="assets/header/icon-logout.svg"
+          alt="logout icon" />
+        {{ t('dropDown.logOut') }}
+      </button>
+    </div>
+  </div>
+  <div class="mobile-right-side">
+    <button class="hamburger-button" (click)="toggleMobileDropdown()">
+      <mat-icon *ngIf="!mobileDropdownOpen" class="icon">menu</mat-icon>
+      <mat-icon *ngIf="mobileDropdownOpen" class="icon">close</mat-icon>
+    </button>
+  </div>
+
+  <div class="mobile-dropdown" [ngClass]="{ open: mobileDropdownOpen }">
+    <div class="navbar">
+      <app-nav-bar
+        (click)="toggleMobileDropdown(false)"
+        class="nav-bar"
+        [navConfig]="userNav" />
+    </div>
+    <div class="button-container">
+      <button *ngIf="currentLanguage === 'sk'" (click)="changeLanguage('en')">
+        <img
+          class="icon"
+          src="assets/header/gb.svg"
+          alt="british english language icon"
+          style="width: 32px; height: 23px" />
+      </button>
+      <button *ngIf="currentLanguage === 'en'" (click)="changeLanguage('sk')">
+        <img
+          class="icon"
+          src="assets/header/sk.svg"
+          alt="slovak language icon"
+          style="width: 32px; height: 23px" />
+      </button>
+      <button class="profile" (click)="toggleDropdown()">
+        <!-- TODO change this icon once we either have default profile icon or use profile images -->
+        <img
+          src="assets/header/avatar.svg"
+          alt="user profile icon"
+          class="profile-avatar" />
+        <div class="dropdown-menu" *ngIf="isDropdownOpen">
+          <button (click)="logout()">
+            <img
+              class="icon logout-icon"
+              src="assets/header/icon-logout.svg"
+              alt="logout icon" />
+            {{ t('dropDown.logOut') }}
+          </button>
+        </div>
+      </button>
+    </div>
+  </div>
+</header>

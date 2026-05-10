@@ -1,0 +1,7 @@
+<!-- Experiment with this if you have time
+ [routerLink]="externalLink ? to : undefined"
+  [href]="externalLink ? undefined : to"
+  -->
+<a [routerLink]="to" [class.no-underline]="noUnderline">
+  <ng-content />
+</a>

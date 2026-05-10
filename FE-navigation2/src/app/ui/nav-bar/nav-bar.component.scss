@@ -1,0 +1,45 @@
+nav {
+  display: flex;
+
+  .container {
+    height: 68px;
+    width: 88px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  .container:hover {
+    background-color: rgba(8, 145, 178, 0.2);
+  }
+
+  .is-active {
+    background-color: #0891b2;
+    .container {
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+@media screen and (max-width: 715px) {
+  nav {
+    display: block;
+    .container {
+      max-width: 100%;
+      width: 100%;
+      font-size: 21px;
+    }
+
+    .is-active {
+      .container {
+        color: white;
+        background-color: #0891b2;
+        font-weight: bold;
+      }
+    }
+  }
+}

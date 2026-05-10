@@ -1,0 +1,525 @@
+{
+  "auth": {
+    "registration": {
+      "title": "Create an account",
+      "alreadyRegistered": {
+        "text": "Are you registered already?",
+        "link": "Sign in"
+      },
+      "form": {
+        "firstName": {
+          "label": "First name",
+          "placeholder": "Enter your first name"
+        },
+        "lastName": {
+          "label": "Last name",
+          "placeholder": "Enter your last name"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email address"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Enter your password"
+        },
+        "passwordConfirm": {
+          "label": "Confirm password",
+          "placeholder": "Confirm your password"
+        },
+        "submit": "Create account",
+        "success": {
+          "title": "Account creation successful",
+          "instructions": {
+            "text": "A verification email has been sent to your email address. To complete the registration process, click on the link in the email. You can then ",
+            "link": "sign in"
+          }
+        }
+      }
+    },
+    "login": {
+      "title": "Sign in",
+      "notRegistered": {
+        "text": "Don't have an account yet?",
+        "link": "Create an account"
+      },
+      "requestPasswordChange": {
+        "link": "Forgot your password?"
+      },
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email address"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Enter your password"
+        },
+        "submit": "Sign in"
+      },
+      "emailVerification": {
+        "verified": "Your email has been verified",
+        "alreadyVerified": "Your email has already been verified",
+        "invalidToken": "Invalid verification token",
+        "unknownStatus": "Unknown verification status"
+      }
+    },
+    "requestChangePassword": {
+      "title": "Reset your password",
+      "backToLogin": {
+        "link": "Back"
+      },
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email address"
+        },
+        "submit": "Send reset link",
+        "success": {
+          "title": "Password reset link sent successfully",
+          "instructions": {
+            "text": "An email has been sent to your email address with further instructions on how to reset your password."
+          }
+        }
+      }
+    },
+    "changePassword": {
+      "title": "Choose a new password",
+      "backToLogin": {
+        "link": "Back to sign in"
+      },
+      "form": {
+        "password": {
+          "label": "Password",
+          "placeholder": "Enter your new password"
+        },
+        "passwordConfirm": {
+          "label": "Confirm password",
+          "placeholder": "Confirm your new password"
+        },
+        "submit": "Confirm new password",
+        "success": {
+          "title": "Password has been changed successfully",
+          "instructions": {
+            "text": "Your password has been changed successfully. You can now sign with your new password by returning to the sign in page."
+          }
+        }
+      }
+    }
+  },
+  "dashboard": {
+    "header": {
+      "dropDown": {
+        "logOut": "Sign out"
+      },
+      "admin": {
+        "sampleUpload": "Add new sample"
+      }
+    },
+    "tabs": {
+      "organ": {
+        "title": "Organ"
+      },
+      "system": {
+        "title": "System"
+      },
+      "learning": {
+        "title": "Learning"
+      }
+    },
+    "catalog": {
+      "catalog-tool-bar": {
+        "textSearchInput": "Search using name",
+        "diagnosisSearchSelect": "Search using key words"
+      },
+      "catalog-no-items": "Criteria used do not match any records."
+    }
+  },
+  "learning": {
+    "studyTypes": {
+      "pregradual": "Pregradual study",
+      "postgradual": "Postgradual study"
+    },
+    "studyPage": {
+      "status": "Status",
+      "description": "Description",
+      "optional": "Optional",
+      "keywords": "Keywords",
+      "categories": {
+        "files": "Files",
+        "folders": "Folders",
+        "images": "Sample images"
+      },
+      "statusTypes": {
+        "public": "Public",
+        "private": "Private"
+      },
+      "actions": {
+        "newFolder": "New folder",
+        "hideFolder": "Hide folder",
+        "publishFolder": "Publish folder",
+        "insertFile": "Insert file",
+        "createFolder": "Create folder",
+        "createNewFolder": "Create",
+        "cancel": "Cancel",
+        "selectImage": "Select sample images",
+        "deleteImages": "Delete images",
+        "deleteFolder": "Delete folder",
+        "deleteFile": "Delete file"
+      },
+      "dialog": {
+        "confirmPublishQuestion": "Are you sure you want to publish this folder with all its content?",
+        "privateParents": "This action will also publish the following parent folders",
+        "confirmDeleteFolderQuestion": "Are you sure you want to delete the following folder with all its children?",
+        "confirmDeleteFileQuestion": "Are you sure you want to delete the following file?",
+        "confirmDeleteSampleImagesQuestion": "Are you sure you want to delete the sample images from the folder?"
+      },
+      "placeholders": {
+        "emptyFiles": "The section currently contains no files.",
+        "emptyFolders": "The section currently contains no folders.",
+        "emptySampleImages": "The section currently contains no sample images."
+      },
+      "notifications": {
+        "sampleImagesDeleted": "Sample images have been deleted successfully",
+        "foldersPublished": "Folder(s) have been published successfully",
+        "folderHiddenPostfix": " has been set to private",
+        "deletedSuccessfullyPostfix": " has been deleted successfully"
+      }
+    },
+    "folderViewComponent": {
+      "actions": {
+        "publish": "Publish",
+        "hide": "Hide",
+        "newFolder": "New folder",
+        "delete": "Delete "
+      }
+
+    },
+
+    "sampleSelectorComponent": {
+    "header": {
+      "title": "Select images",
+      "subtitle": "Number of selected images: {{count}}"
+    },
+    "actions": {
+      "back": "Back",
+      "insertSelected": "Insert selected images"
+    },
+    "modal": {
+      "warningMessage": "Your selection of images was not inserted into the document.",
+      "cancel": "Leave page",
+      "confirm": "Insert selection"
+    }
+  }
+
+  },
+  "home": {
+    "title": "Histological atlas",
+    "content": "Content",
+    "addsamplebutton": "Add new sample",
+    "welcomeMessage": {
+      "paragraph1": "Welcome to our website, where we have created a unique histopathological atlas. Histopathology is a fascinating field that deals with the study of tissues and cells and their pathological changes. Our goal is to provide professionals, students, and medical enthusiasts with access to a rich source of images and information that will help them better understand various histological findings.",
+      "paragraph2": "Our atlas contains a wide range of histopathological cases, covering various organs and tissues. Each case is thoroughly documented, with high-quality images and a description of histological characteristics. We believe that this atlas will be a useful tool for education, research, and diagnostics in the field of histopathology."
+    },
+    "tiles": {
+      "classwork": {
+        "title": "Learning",
+        "description": "Digitalized preparations sorted according to the syllabus of the university."
+      },
+      "tasks": {
+        "title": "Tasks",
+        "description": "Digitalized preparations with tasks assigned for completion.",
+        "admindescription": "Tasks submitted by students."
+      },
+      "samples": {
+        "title": "Samples",
+        "description": "List of digitalized preparations."
+      },
+      "materials": {
+        "title": "Materials",
+        "description": "Material for specific teaching topics."
+      }
+    }
+  },
+  "samples": {
+    "tiles": {
+      "allSamples": {
+        "title": "All samples",
+        "description": "List of all digitalized preparations."
+      },
+      "organ": {
+        "title": "Organ",
+        "description": "Histopathological cases grouped by respective organs."
+      },
+      "system": {
+        "title": "System",
+        "description": "Digitalized preparations grouped by respective body systems."
+      },
+      "classwork": {
+        "title": "Learning",
+        "description": "Digitalized preparations sorted according to the syllabus of the university."
+      },
+      "tasks": {
+        "title": "Tasks",
+        "description": "Digitalized preparations with tasks assigned for completion.",
+        "admindescription": "Tasks submitted by students."
+      },
+      "samples": {
+        "title": "Samples",
+        "description": "List of all digitalized preparations."
+      },
+      "materials": {
+        "title": "Materials",
+        "description": "Material for specific teaching topics."
+      }
+    }
+  },
+  "admin": {
+    "sampleUpload": {
+      "title": "New sample",
+      "form": {
+        "sampleImage": {
+          "label": "Upload sample image",
+          "placeholder": "Choose file to upload"
+        },
+        "sampleImageFileName": {
+          "label": "Sample image file name"
+        },
+        "keyWords": {
+          "label": "Keywords"
+        },
+        "annotationFile": {
+          "label": "Upload annotation file",
+          "placeholder": "Choose file to upload"
+        },
+        "newOrgan": {
+          "label": "New organ",
+          "placeholder": "Enter new organ name"
+        },
+        "organ": {
+          "label": "Organ"
+        },
+        "newSystem": {
+          "label": "New system",
+          "placeholder": "Enter new system name"
+        },
+        "system": {
+          "label": "System"
+        },
+        "submitSampleImage": "Submit new sample image",
+        "submit": "Submit new sample"
+      },
+      "uploadProgress": {
+        "upload": "Uploading",
+        "cancel": "Cancel"
+      }
+    },
+    "samplesList": {
+      "header": {
+        "buttons": {
+          "organ": "Organ",
+          "bodySystem": "System",
+          "addSample": "Add new sample"
+        }
+      },
+      "table": {
+        "columns": {
+          "ID": "ID",
+          "isFavorite": "Favourite",
+          "caustryName": "Caustry name",
+          "sampleName": "Sample name",
+          "comments": "Comments",
+          "annotations": "Annotations",
+          "keyWords": "Keywords",
+          "note": "Notes",
+          "visibility": "Visibility",
+          "flag": "Flag",
+          "organ": "Organ",
+          "systems": "System",
+          "annotation": "Annotations",
+          "editButton": "Edit",
+          "deleteButton": "Delete",
+          "cancel": "Cancel"
+        },
+        "values": {
+          "yes": "Yes",
+          "no": "No",
+          "placeholder": "Enter notes here",
+          "boolCols": {
+            "yes": "Yes",
+            "no": "No",
+            "all": "All"
+          }
+        },
+        "search": {
+          "placeholder": "Search",
+          "noData": "Criteria used do not match any records."
+        }
+      }
+    },
+    "flagsComponent": {
+      "title": "Flags",
+      "chooseColor": "Choose the flag color:"
+    },
+    "editTags": {
+      "addTag": "Add a key word",
+      "tagsNotFound": "There are no key words yet"
+    },
+    "editFlagsComponent": {
+      "titleMainModalDeleteConfirm": "Delete Label",
+      "textMainModalDeleteConfirm": "Do you want to delete flag",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "addFlagsComponent": {
+      "title": "New Flag",
+      "addFlagTitle": "Enter the name of the new flag:",
+      "addFlagColor": "Select the flag color:",
+      "clean": "Cancel",
+      "create": "Create",
+      "warning": "Fill in the name and select a label color!",
+      "placeholder": "Enter a name"
+    },
+    "adminNotification": {
+      "selectedItems": "Selected items",
+      "wasDeleted": "were deleted.",
+      "setAsPrivate": "were set as private.",
+      "setAsPublic": "were set as public.",
+      "undoAction": "Action was undone",
+      "undo": "Back"
+    },
+    "confirmModal": {
+      "titleMainDeleteConfirm": "Delete file",
+      "textMainDeleteConfirm": "Are you sure you want to delete file {{file}}?",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    },
+    "fileUploadModal": {
+      "caustryLabel": "Sample name",
+      "folderFileLabel": "Folder name",
+      "headerTitle": "New file",
+      "selectNotification": "Insert the corresponding file",
+      "findFileBold": "Browse",
+      "findFileNormal": "file",
+      "submitFile": "Upload File"
+    }
+  },
+  "basic": {
+    "ui": {
+      "forms": {
+        "input": {
+          "errors": {
+            "required": "Required field",
+            "email": "Email is not valid",
+            "minlength": "Minimum length is {{requiredLength}} characters",
+            "specialSym": "The password must contain special characters",
+            "upperCaseLetter": "The password must contain capital letters",
+            "name": "Name must start with a capital letter",
+            "weakPassword": "The password must contain numbers",
+            "passwordMismatch": "Passwords do not match"
+          }
+        }
+      },
+      "header": {
+        "nav": {
+          "sampleImage": "Samples",
+          "organ": "Organ",
+          "system": "System",
+          "classwork": "Learning",
+          "tasks": "Tasks"
+        }
+      }
+    }
+  },
+  "api": {
+    "error": {
+      "serverError": "An error has occurred on the server, please try again later",
+      "unknownError": "Unexpected error, please try again later",
+      "registration": {
+        "userAlreadyExists": "User with this email already exists",
+        "invalidForm": "Form contains invalid data"
+      },
+      "login": {
+        "invalidUserCredentials": "You have entered an invalid email or password",
+        "emailNotVerified": "Email has not been verified, please check your inbox for a verification email"
+      },
+      "requestChangePassword": {
+        "invalidForm": "Form contains invalid data"
+      },
+      "changePassword": {
+        "invalidResetPasswordToken": "Verification link is invalid or has expired",
+        "invalidPassword": "Provided password is too weak",
+        "invalidForm": "Form contains invalid data"
+      }
+    }
+  },
+  "organDetail": {
+    "table": {
+      "columns": {
+        "isFavorite": "Favourite",
+        "caustryName": "Caustry name",
+        "sampleName": "Sample name",
+        "annotations": "Annotations",
+        "keyWords": "Keywords",
+        "note": "Notes",
+        "organ": "Organ",
+        "systems": "System"
+      },
+      "values": {
+        "boolCols": {
+          "yes": "Yes",
+          "no": "No",
+          "all": "All"
+        },
+        "isFavorite": {
+          "yes": "Yes️",
+          "no": "No"
+        },
+        "diagnosis": {
+          "hidden": "Hidden"
+        },
+        "note": {
+          "placeholder": "Enter your notes here",
+          "editor": {
+            "save": "Save",
+            "close": "Close"
+          }
+        }
+      },
+      "search": {
+        "placeholder": "Search",
+        "noData": "Criteria used do not match any records."
+      }
+    }
+  },
+  "sampleImage": {
+    "zoom-level": "Zoom level",
+    "assistant": {
+      "title": "Assistant",
+      "hideNames": "Hide names",
+      "hideDescription": "Hide descriptions",
+      "keyWords": "Keywords",
+      "notes": "Notes",
+      "area": "Area",
+      "values": {
+        "note": {
+          "placeholder": "Enter notes here",
+          "editor": {
+            "save": "Save",
+            "close": "Close"
+          }
+        }
+      }
+    }
+  },
+  "route": {
+    "home": "HIPA",
+    "organCatalog": "Organ",
+    "systemCatalog": "System",
+    "sampleImage": "Samples",
+    "all": "All",
+    "classwork": "Learning",
+    "pregradual": "Pregradual",
+    "postgradual": "Postgradual"
+  }
+}

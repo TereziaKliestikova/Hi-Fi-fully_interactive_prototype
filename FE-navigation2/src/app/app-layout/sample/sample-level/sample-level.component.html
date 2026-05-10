@@ -1,0 +1,36 @@
+<div style="margin: 1em">
+  <app-breadcrumb />
+</div>
+<div class="page-container">
+  <mat-grid-list
+    cols="3"
+    rowHeight="500px"
+    gutterSize="70px"
+    class="grid-container">
+    @for (tile of sampleCatalogConfig; track tile) {
+      <app-anchor noUnderline to="{{ tile.path }}" class="tile-anchor">
+        <mat-grid-tile class="tile-container">
+          <div class="tile content-area">
+            <h3 class="tile-heading">{{ tile.title | async }}</h3>
+            <div class="tile-text">
+              <p>{{ tile.description | async }}</p>
+            </div>
+            <div
+              class="image-container"
+              [style.height]="tile.heightOverride ? tile.heightOverride : ''"
+              [style.margin-top]="
+                tile.marginTopOverride ? tile.marginTopOverride : ''
+              ">
+              <img
+                [style.height]="tile.heightOverride ? tile.heightOverride : ''"
+                src="{{ tile.imageUrl }}"
+                alt="{{ tile.alt }}"
+                role="img"
+                class="image" />
+            </div>
+          </div>
+        </mat-grid-tile>
+      </app-anchor>
+    }
+  </mat-grid-list>
+</div>
