@@ -1,0 +1,42 @@
+name: hipa
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    # networks:
+    #   - host-bridge
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  be:
+    build: .
+    ports:
+      - '81:8080'
+    # networks:
+    #   - host-bridge
+    environment:
+      - AssetConfiguration__SampleImagesPath=/media/wsi
+      - TusConfig__UploadPath=/app/assets/uploads
+    volumes:
+      - /media/wsi:/media/wsi                
+      - ./assets:/app/assets                 
+    depends_on:
+      - db
+
+volumes:
+  postgres:
+    driver: local
+  wsi_data:                                  
+    driver: local
+    driver_opts:
+      type: none
+      device: /media/wsi                    
+      o: bind
+# networks:
+#   host-bridge:
+#     name: host
+#     external: true
