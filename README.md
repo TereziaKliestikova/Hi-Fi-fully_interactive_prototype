@@ -40,7 +40,23 @@ Password: postgres
 
 ---
 
-## 1. Running the Backend
+## 1. Cloning the Repository
+
+First, clone this repository to your local computer:
+
+```bash
+git clone https://github.com/TereziaKliestikova/Hi-Fi-fully_interactive_prototype.git
+```
+
+Then navigate into the folder:
+
+```bash
+cd Hi-Fi-fully_interactive_prototype
+```
+
+---
+
+## 2. Running the Backend
 
 Before running any frontend version, start the backend.
 
@@ -66,7 +82,7 @@ http://localhost:5255/swagger/index.html
 
 ---
 
-## 2. Applying Database Migrations
+## 3. Applying Database Migrations
 
 In most cases, the backend can be started directly using:
 
@@ -96,7 +112,7 @@ dotnet run
 
 ---
 
-## 3. Running a Frontend Version
+## 4. Running a Frontend Version
 
 Each navigation structure has its own frontend folder. Only one frontend version should be running at a time.
 
@@ -128,7 +144,7 @@ http://localhost:4200/
 
 ---
 
-## 4. Switching Between Navigation Structures
+## 5. Switching Between Navigation Structures
 
 During usability testing, the backend stays running and only the frontend is switched.
 
@@ -179,7 +195,7 @@ ng serve --configuration development --open
 
 ---
 
-## 5. Login Credentials
+## 6. Login Credentials
 
 Use the following testing account to access the application:
 
@@ -192,7 +208,7 @@ The backend must be running for login and application content to work correctly.
 
 ---
 
-## 6. Troubleshooting
+## 7. Troubleshooting
 
 If the frontend opens but the content does not load, check the following:
 
